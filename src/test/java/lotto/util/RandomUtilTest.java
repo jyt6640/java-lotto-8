@@ -3,7 +3,9 @@ package lotto.util;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import Util.RandomUtil;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,5 +28,19 @@ public class RandomUtilTest {
 
         //when&then
         assertThat(input.size()).isEqualTo(6);
+    }
+
+    @DisplayName("하나의 로또를 발행 할 때 중복되지 않는 숫자 발행")
+    @Test
+    void 하나의_로또를_발행_할_때_중복되지_않는_숫자_발행() {
+        //given
+        List<Integer> input = RandomUtil.getLotto();
+        Set<Integer> uniqueNumbers = new HashSet<>();
+
+        //when
+        uniqueNumbers.addAll(input);
+
+        //then
+        assertThat(uniqueNumbers.size()).isEqualTo(6);
     }
 }
