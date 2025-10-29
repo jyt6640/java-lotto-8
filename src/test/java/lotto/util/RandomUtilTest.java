@@ -17,4 +17,14 @@ public class RandomUtilTest {
         //when&then
         assertThat(input.getFirst()).isBetween(1, 45);
     }
+
+    @DisplayName("로또 번호 6개 뽑기")
+    @Test
+    void 로또_번호_6개_뽑기() {
+        //given
+        List<Integer> input = RandomUtil.getLotto();
+
+        //when&then
+        assertThat(input.size()).isEqualTo(6);
+    }
 }
