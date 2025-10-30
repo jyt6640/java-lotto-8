@@ -26,4 +26,8 @@ public class RandomUtil {
     public static int extractBonusNumber(List<Integer> getWinningNumbers) {
         return getWinningNumbers.getLast();
     }
+
+    public static List<Integer> extractWinningNumbers(List<Integer> getWinningNumbers) {
+        return getWinningNumbers.subList(0,5);
+    }
 }
