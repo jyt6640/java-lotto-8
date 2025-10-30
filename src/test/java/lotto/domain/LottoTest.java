@@ -89,4 +89,17 @@ class LottoTest {
                 )
         );
     }
+
+    @DisplayName("보너스 번호가 있는지 확인")
+    @Test
+    void 보너스_번호가_있는지_확인() {
+        //given
+        Lotto myLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 6;
+
+        //when
+        boolean result = myLotto.hasBonusNumber(bonusNumber);
+
+        assertThat(result).isTrue();
+    }
 }
