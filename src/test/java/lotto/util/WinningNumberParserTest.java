@@ -46,4 +46,17 @@ public class WinningNumberParserTest {
         //then
         assertThat(result).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
     }
+
+    @DisplayName("보너스 번호 입력 후 int로 변환")
+    @Test
+    void 보너스_번호_입력_후_int로_변환() {
+        //given
+        String input = "7";
+
+        //when
+        int result = WinningNumberParser.parseBonusNumber(input);
+
+        //then
+        assertThat(result).isEqualTo(7);
+    }
 }
