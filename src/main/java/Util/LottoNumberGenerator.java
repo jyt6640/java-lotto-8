@@ -3,7 +3,7 @@ package Util;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.List;
 
-public class RandomUtil {
+public class LottoNumberGenerator {
     private static final int DEFAULT_COUNT = 6;
     private static final int WINNING_NUMBER_COUNT = 7;
 
@@ -21,13 +21,5 @@ public class RandomUtil {
 
     public static List<Integer> getWinningLotto() {
         return getWinningNumbers(WINNING_NUMBER_COUNT);
-    }
-
-    public static int extractBonusNumber(List<Integer> getWinningNumbers) {
-        return getWinningNumbers.getLast();
-    }
-
-    public static List<Integer> extractWinningNumbers(List<Integer> getWinningNumbers) {
-        return getWinningNumbers.subList(0,5);
     }
 }
