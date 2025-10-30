@@ -5,7 +5,8 @@ public enum Rank {
     SECOND(30_000_000L),
     THIRD(1_500_000L),
     FOURTH(50_000L),
-    FIFTH(5_000L);
+    FIFTH(5_000L),
+    NONE(0L);
 
     private final long prize;
 
@@ -29,7 +30,7 @@ public enum Rank {
         if(matchCounts == 3) {
             return FIFTH;
         }
-        return null;
+        return NONE;
     }
 
     public long getPrize() {
