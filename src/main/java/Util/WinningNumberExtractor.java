@@ -8,6 +8,6 @@ public class WinningNumberExtractor {
     }
 
     public static List<Integer> extractWinningNumbers(List<Integer> getWinningNumbers) {
-        return getWinningNumbers.subList(0,5);
+        return getWinningNumbers.subList(0, 6);
     }
 }
