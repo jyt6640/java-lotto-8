@@ -32,6 +32,18 @@ public class RankTest {
         assertThat(input.getPrize()).isEqualTo(30_000_000L);
     }
 
+    @DisplayName("보너스 번호가 있을 시 등수 변화")
+    @Test
+    void 보너스_번호가_있을_시_등수_변화() {
+        //given&when
+        Rank input = Rank.of(2, true);
+
+        //then
+        assertThat(input).isEqualTo(Rank.FIFTH);
+        assertThat(input.getPrize()).isEqualTo(5_000L);
+    }
+
+
     @DisplayName("일치 개수에 따른 등수 반환")
     @MethodSource("provideRanks")
     @ParameterizedTest
