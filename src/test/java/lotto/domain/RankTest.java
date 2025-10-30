@@ -27,4 +27,15 @@ public class RankTest {
         assertThat(input).isEqualTo(Rank.SECOND);
         assertThat(input.getPrize()).isEqualTo(30_000_000L);
     }
+
+    @DisplayName("다섯개 일치 시 3등")
+    @Test
+    void 다섯개_일치_시_3등() {
+        //given&when
+        Rank input = Rank.of(5, false);
+
+        //then
+        assertThat(input).isEqualTo(Rank.THIRD);
+        assertThat(input.getPrize()).isEqualTo(1_500_000L);
+    }
 }
