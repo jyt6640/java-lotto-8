@@ -22,4 +22,8 @@ public class RandomUtil {
     public static List<Integer> getWinningLotto() {
         return getWinningNumbers(WINNING_NUMBER_COUNT);
     }
+
+    public static int extractBonusNumber(List<Integer> getWinningNumbers) {
+        return getWinningNumbers.getLast();
+    }
 }
