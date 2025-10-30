@@ -3,18 +3,20 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, false, 2_000_000_000L),
-    SECOND(5, true, 30_000_000L),
-    THIRD(5, false, 1_500_000L),
-    FOURTH(4, false, 50_000L),
-    FIFTH(3, false, 5_000L),
-    NONE(0, false, 0L);
+    FIRST(null, 6, false, 2_000_000_000L),
+    SECOND(FIRST, 5, true, 30_000_000L),
+    THIRD(SECOND, 5, false, 1_500_000L),
+    FOURTH(THIRD, 4, false, 50_000L),
+    FIFTH(FOURTH, 3, false, 5_000L),
+    NONE(FIFTH, 0, false, 0L);
 
+    private Rank upperRank;
     private final int matchCount;
     private final boolean hasBonusNumber;
     private final long prize;
 
-    Rank(int matchCount, boolean hasBonusNumber, long prize) {
+    Rank(Rank upperRank, int matchCount, boolean hasBonusNumber, long prize) {
+        this.upperRank = upperRank;
         this.matchCount = matchCount;
         this.hasBonusNumber = hasBonusNumber;
         this.prize = prize;
@@ -26,7 +28,17 @@ public enum Rank {
                 .filter(rank -> !rank.hasBonusNumber || hasBonusNumber)
                 .findFirst()
                 .orElse(NONE);
+        if (hasBonusNumber && matchCounts >= 2) {
+            return baseRank.upgrade();
+        }
         return baseRank;
+    }
+
+    private Rank upgrade() {
+        if (this == SECOND) {
+            return this;
+        }
+        return upperRank;
     }
 
     public long getPrize() {
