@@ -51,6 +51,9 @@ public class RankTest {
 
     private static Stream<Arguments> provideRanks() {
         return Stream.of(
+                Arguments.of(0, false, Rank.NONE, 0L),
+                Arguments.of(1, false, Rank.NONE, 0L),
+                Arguments.of(2, false, Rank.NONE, 0L),
                 Arguments.of(3, false, Rank.FIFTH, 5_000L),
                 Arguments.of(4, false, Rank.FOURTH, 50_000L),
                 Arguments.of(5, false, Rank.THIRD, 1_500_000L)
