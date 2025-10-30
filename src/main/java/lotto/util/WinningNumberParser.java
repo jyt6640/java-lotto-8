@@ -18,4 +18,8 @@ public class WinningNumberParser {
                 .map(Integer::parseInt)
                 .toList();
     }
+
+    public static int parseBonusNumber(String input) {
+        return Integer.parseInt(input.strip());
+    }
 }
