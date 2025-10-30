@@ -15,9 +15,11 @@ public class LottoNumberGeneratorTest {
     void 로또_번호의_숫자가_1에서_45_범위_내에_있는지_확인() {
         //given
         List<Integer> input = LottoNumberGenerator.getLottoNumber(1);
+        List<Integer> winningNumberInput = LottoNumberGenerator.getWinningNumbers(1);
 
         //when&then
         assertThat(input.getFirst()).isBetween(1, 45);
+        assertThat(winningNumberInput.getFirst()).isBetween(1, 45);
     }
 
     @DisplayName("로또 번호 6개 뽑기")
