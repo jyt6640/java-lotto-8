@@ -23,15 +23,19 @@ public enum Rank {
     }
 
     public static Rank of(int matchCounts, boolean hasBonusNumber) {
-        Rank baseRank = Arrays.stream(values())
-                .filter(rank -> rank.matchCount == matchCounts)
-                .filter(rank -> !rank.hasBonusNumber || hasBonusNumber)
-                .findFirst()
-                .orElse(NONE);
+        Rank baseRank = fromMatchCount(matchCounts, hasBonusNumber);
         if (hasBonusNumber && matchCounts >= 2) {
             return baseRank.upgrade();
         }
         return baseRank;
+    }
+
+    private static Rank fromMatchCount(int matchCount, boolean hasBonusNumber) {
+        return Arrays.stream(values())
+                .filter(rank -> rank.matchCount == matchCount)
+                .filter(rank -> !rank.hasBonusNumber || hasBonusNumber)
+                .findFirst()
+                .orElse(NONE);
     }
 
     private Rank upgrade() {
