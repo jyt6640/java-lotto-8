@@ -2,8 +2,12 @@ package lotto.domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class RankTest {
     @DisplayName("여섯개 일치 시 1등")
@@ -28,14 +32,28 @@ public class RankTest {
         assertThat(input.getPrize()).isEqualTo(30_000_000L);
     }
 
-    @DisplayName("다섯개 일치 시 3등")
-    @Test
-    void 다섯개_일치_시_3등() {
+    @DisplayName("일치 개수에 따른 등수 반환")
+    @MethodSource("provideRanks")
+    @ParameterizedTest
+    void 일치_개수에_따른_등수_반환(
+            int matchCount,
+            boolean hasBonusNumber,
+            Rank expectedRank,
+            long expectedPrize
+    ) {
         //given&when
-        Rank input = Rank.of(5, false);
+        Rank input = Rank.of(matchCount, hasBonusNumber);
 
         //then
-        assertThat(input).isEqualTo(Rank.THIRD);
-        assertThat(input.getPrize()).isEqualTo(1_500_000L);
+        assertThat(input).isEqualTo(expectedRank);
+        assertThat(input.getPrize()).isEqualTo(expectedPrize);
+    }
+
+    private static Stream<Arguments> provideRanks() {
+        return Stream.of(
+                Arguments.of(3, false, Rank.FIFTH, 5_000L),
+                Arguments.of(4, false, Rank.FOURTH, 50_000L),
+                Arguments.of(5, false, Rank.THIRD, 1_500_000L)
+        );
     }
 }
