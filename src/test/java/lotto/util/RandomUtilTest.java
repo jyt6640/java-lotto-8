@@ -68,7 +68,7 @@ public class RandomUtilTest {
         assertThat(uniqueNumbers.size()).isEqualTo(7);
     }
 
-    @DisplayName("당첨 번호 6개와 보너스 번호 1개 분리")
+    @DisplayName("보너스 번호 1개 분리")
     @Test
     void 당첨_번호_6개와_보너스_번호_1개_분리() {
         //given
@@ -79,5 +79,18 @@ public class RandomUtilTest {
 
         //then
         assertThat(bonusNumber).isEqualTo(input.getLast());
+    }
+
+    @DisplayName("당첨 번호 6개 분리")
+    @Test
+    void 당첨_번호_6개_분리() {
+        //given
+        List<Integer> input = RandomUtil.getWinningLotto();
+
+        //when
+        List<Integer> winningNumbers = RandomUtil.extractWinningNumbers(input);
+
+        //then
+        assertThat(winningNumbers).isEqualTo(input.subList(0,5));
     }
 }
