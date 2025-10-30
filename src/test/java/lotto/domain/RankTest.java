@@ -44,10 +44,10 @@ public class RankTest {
     }
 
 
-    @DisplayName("일치 개수에 따른 등수 반환")
+    @DisplayName("일치 개수와 보너스 번호 여부에 따른 등수 반환")
     @MethodSource("provideRanks")
     @ParameterizedTest
-    void 일치_개수에_따른_등수_반환(
+    void 일치_개수와_보너스_번호_여부에_따른_등수_반환(
             int matchCount,
             boolean hasBonusNumber,
             Rank expectedRank,
@@ -68,7 +68,14 @@ public class RankTest {
                 Arguments.of(2, false, Rank.NONE, 0L),
                 Arguments.of(3, false, Rank.FIFTH, 5_000L),
                 Arguments.of(4, false, Rank.FOURTH, 50_000L),
-                Arguments.of(5, false, Rank.THIRD, 1_500_000L)
+                Arguments.of(5, false, Rank.THIRD, 1_500_000L),
+                Arguments.of(6, false, Rank.FIRST, 2_000_000_000L),
+                Arguments.of(0, true, Rank.NONE, 0L),
+                Arguments.of(1, true, Rank.NONE, 0L),
+                Arguments.of(2, true, Rank.FIFTH, 5_000L),
+                Arguments.of(3, true, Rank.FOURTH, 50_000L),
+                Arguments.of(4, true, Rank.THIRD, 1_500_000L),
+                Arguments.of(5, true, Rank.SECOND, 30_000_000L)
         );
     }
 }
