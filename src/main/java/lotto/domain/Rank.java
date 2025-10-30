@@ -2,7 +2,8 @@ package lotto.domain;
 
 public enum Rank {
     FIRST(2_000_000_000L),
-    SECOND(30_000_000L);
+    SECOND(30_000_000L),
+    THIRD(1_500_000L);
 
     private final long prize;
 
@@ -16,6 +17,9 @@ public enum Rank {
         }
         if(matchCounts == 5 && hasBonusNumber) {
             return SECOND;
+        }
+        if(matchCounts == 5) {
+            return THIRD;
         }
         return null;
     }
