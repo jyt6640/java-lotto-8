@@ -2,7 +2,7 @@ package lotto.util;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import Util.WinningNumberExtractor;
+import util.WinningNumberExtractor;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
