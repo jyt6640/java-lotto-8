@@ -14,12 +14,19 @@ public class Money {
 
     public void validate(int amount) {
         validateMinAmount(amount);
+        validateMaxAmount(amount);
         validateUnit(amount);
     }
 
     private void validateMinAmount(int amount) {
         if (amount < 1000) {
             throw new IllegalArgumentException("[ERROR] 최소 금액은 1,000원 이상이어야 합니다.");
+        }
+    }
+
+    private void validateMaxAmount(int amount) {
+        if (amount > 100000) {
+            throw new IllegalArgumentException("[ERROR] 한 회차당 구매 가능 금액은 10만원입니다.");
         }
     }
 
