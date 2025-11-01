@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.service.dto.LottoPurchaseResult;
 import lotto.util.LottoNumberGenerator;
 
 public class LottoMachine {
-    public Lottos purchase(int amount) {
-        int count = calculateLottoCount(amount);
-        return generateLottos(count);
+    public LottoPurchaseResult purchase(int amount) {
+        int purchaseCount  = calculateLottoCount(amount);
+        Lottos lottos = generateLottos(purchaseCount);
+        return new LottoPurchaseResult(purchaseCount, lottos);
     }
 
     private int calculateLottoCount(int amount) {

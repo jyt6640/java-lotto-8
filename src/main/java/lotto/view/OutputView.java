@@ -5,9 +5,8 @@ import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 public class OutputView {
-    public void printMyLottos(int amount, Lottos lottos) {
-        int count = amount / 1000;
-        System.out.println(count + "개를 구매했습니다.");
+    public void printMyLottos(int purchaseCount, Lottos lottos) {
+        System.out.println(purchaseCount + "개를 구매했습니다.");
         lottos.getLottos().forEach(lotto ->
             System.out.println(lotto.getNumbers())
         );
