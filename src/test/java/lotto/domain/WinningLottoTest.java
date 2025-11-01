@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -87,12 +88,21 @@ public class WinningLottoTest {
     @Test
     void 보너스_번호가_있는지_확인() {
         //given
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 6);
-        Lotto myLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
+        Lotto myLotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
 
         //when
         boolean result = winningLotto.hasBonusNumber(myLotto);
 
         assertThat(result).isTrue();
+    }
+
+    @DisplayName("당첨 번호와 보너스 번호가 겹치면 예외 발생")
+    @Test
+    void 당첨_번호와_보너스_번호가_겹치면_예외_발생() {
+        //when&then
+        assertThatThrownBy(() -> new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 6))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
 }
