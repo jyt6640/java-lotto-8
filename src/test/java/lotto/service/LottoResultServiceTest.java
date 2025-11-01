@@ -2,6 +2,7 @@ package lotto.service;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -11,6 +12,7 @@ import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -231,4 +233,30 @@ public class LottoResultServiceTest {
                 )
         );
     }
+
+    @DisplayName("당첨 통계 기반으로 수익률 계산")
+    @Test
+    void 당첨_통계_기반으로_수익률_계산() {
+        //given
+        int totalPurchaseAmount = 6 * 1000;
+
+        Map<Rank, Integer> statistics = new EnumMap<>(Rank.class);
+        for (Rank rank : Rank.values()) {
+            statistics.put(rank, 0);
+        }
+
+        statistics.put(Rank.FIRST, 1);
+        statistics.put(Rank.SECOND, 1);
+        statistics.put(Rank.THIRD, 1);
+        statistics.put(Rank.FOURTH, 1);
+        statistics.put(Rank.FIFTH, 1);
+        statistics.put(Rank.NONE, 1);
+
+        //when
+        double result = lottoResultService.calculateProfitRate(statistics, totalPurchaseAmount);
+
+        //then
+        assertThat(result).isEqualTo(338592.5);
+    }
+
 }
