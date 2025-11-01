@@ -8,44 +8,35 @@ import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.service.LottoMachine;
 import lotto.service.LottoResultService;
-import lotto.util.WinningNumberParser;
-import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-    private final InputView inputView;
-    private final OutputView outputView;
+    private final InputHandler inputHandler;
+    private final OutputHandler outputHandler;
     private final LottoMachine lottoMachine;
     private final LottoResultService lottoResultService;
 
     public LottoController() {
-        this.inputView = new InputView();
-        this.outputView = new OutputView();
+        this.inputHandler = new InputHandler();
+        this.outputHandler = new OutputHandler();
         this.lottoMachine = new LottoMachine();
         this.lottoResultService = new LottoResultService();
     }
 
     public void run() {
         try {
-            String purchaseAmountStr = inputView.readPurchaseAmount();
-            int purchaseAmount = Integer.parseInt(purchaseAmountStr);
-
+            int purchaseAmount = inputHandler.readPurchaseAmount();
             Lottos myLottos = lottoMachine.purchase(purchaseAmount);
-            outputView.printMyLottos(purchaseAmount, myLottos);
+            outputHandler.printMyLottos(purchaseAmount, myLottos);
 
-            String winningNumbersStr = inputView.readWinningLottoNumbers();
-            List<Integer> winningNumbers = WinningNumberParser.parseWinningNumbers(winningNumbersStr);
-            String bonusNumberStr = inputView.readBonusNumber();
-            int bonusNumber = WinningNumberParser.parseBonusNumber(bonusNumberStr);
-
+            List<Integer> winningNumbers = inputHandler.readWinningNumbers();
+            int bonusNumber = inputHandler.readBonusNumber();
             WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
             Map<Rank, Integer> statistics = lottoResultService.getStatistics(winningLotto, myLottos);
             double profitRate = lottoResultService.calculateProfitRate(statistics, purchaseAmount);
 
-            outputView.printResult(statistics, profitRate);
-        } catch (IllegalArgumentException e) {
-            throw e;
+            outputHandler.printResult(statistics, profitRate);
         } finally {
             Console.close();
         }
