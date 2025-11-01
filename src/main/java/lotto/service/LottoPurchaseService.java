@@ -7,7 +7,7 @@ import lotto.domain.Lottos;
 import lotto.service.dto.LottoPurchaseResult;
 import lotto.util.LottoNumberGenerator;
 
-public class LottoMachine {
+public class LottoPurchaseService {
     public LottoPurchaseResult purchase(int amount) {
         int purchaseCount  = calculateLottoCount(amount);
         Lottos lottos = generateLottos(purchaseCount);

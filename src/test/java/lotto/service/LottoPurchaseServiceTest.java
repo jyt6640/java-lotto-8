@@ -8,12 +8,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class LottoMachineTest {
-    private LottoMachine machine;
+public class LottoPurchaseServiceTest {
+    private LottoPurchaseService machine;
 
     @BeforeEach
     public void setUp() {
-        machine = new LottoMachine();
+        machine = new LottoPurchaseService();
     }
 
     @DisplayName("구입 금액에 따라 로또를 발행")

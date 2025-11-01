@@ -5,27 +5,27 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
-import lotto.service.LottoMachine;
+import lotto.service.LottoPurchaseService;
 import lotto.service.LottoResultService;
 import lotto.service.dto.LottoPurchaseResult;
 
 public class LottoController {
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
-    private final LottoMachine lottoMachine;
+    private final LottoPurchaseService lottoPurchaseService;
     private final LottoResultService lottoResultService;
 
     public LottoController() {
         this.inputHandler = new InputHandler();
         this.outputHandler = new OutputHandler();
-        this.lottoMachine = new LottoMachine();
+        this.lottoPurchaseService = new LottoPurchaseService();
         this.lottoResultService = new LottoResultService();
     }
 
     public void run() {
         try {
             int purchaseAmount = inputHandler.readPurchaseAmount();
-            LottoPurchaseResult result = lottoMachine.purchase(purchaseAmount);
+            LottoPurchaseResult result = lottoPurchaseService.purchase(purchaseAmount);
             outputHandler.printMyLottos(result);
 
             List<Integer> winningNumbers = inputHandler.readWinningNumbers();
