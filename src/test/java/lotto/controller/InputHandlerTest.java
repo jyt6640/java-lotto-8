@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import lotto.view.InputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class InputHandlerTest {
     private InputHandler inputHandler;
@@ -24,7 +26,63 @@ public class InputHandlerTest {
         //when&then
         assertThatThrownBy(inputHandler::readPurchaseAmount)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구매 금액은 숫자만 입력 가능합니다.");
+                .hasMessageContaining("[ERROR] 구매 금액은 숫자만 입력 가능합니다.");
+    }
 
+    @DisplayName("구입 금액 입력 시 공백 입력은 예외 발생")
+    @ValueSource(strings = {"", " ", "  ", "\t", "\n", "\r", "\r\n"})
+    @ParameterizedTest
+    void 구입금액_공백_입력_시_예외(String input) {
+        //given
+        InputView inputView = new InputView() {
+            @Override
+            public String readPurchaseAmount() {
+                return input;
+            }
+        };
+        inputHandler = new InputHandler(inputView);
+
+        //when&then
+        assertWhiteSpaceThrows(inputHandler::readPurchaseAmount);
+    }
+
+    @DisplayName("당첨 번호 입력 시 공백 입력은 예외 발생")
+    @ValueSource(strings = {"", " ", "  ", "\t", "\n", "\r", "\r\n"})
+    @ParameterizedTest
+    void 당첨번호_공백_입력_시_예외(String input) {
+        //given
+        InputView inputView = new InputView() {
+            @Override
+            public String readWinningLottoNumbers() {
+                return input;
+            }
+        };
+        inputHandler = new InputHandler(inputView);
+
+        // when&then
+        assertWhiteSpaceThrows(inputHandler::readWinningNumbers);
+    }
+
+    @DisplayName("보너스 번호 입력 시 공백 입력은 예외 발생")
+    @ValueSource(strings = {"", " ", "  ", "\t", "\n", "\r", "\r\n"})
+    @ParameterizedTest
+    void 보너스번호_공백_입력_시_예외(String input) {
+        //given
+        InputView inputView = new InputView() {
+            @Override
+            public String readBonusNumber() {
+                return input;
+            }
+        };
+        inputHandler = new InputHandler(inputView);
+
+        //when&then
+        assertWhiteSpaceThrows(inputHandler::readBonusNumber);
+    }
+
+    private void assertWhiteSpaceThrows(Runnable runnable) {
+        assertThatThrownBy(runnable::run)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 입력값은 공백일 수 없습니다.");
     }
 }
