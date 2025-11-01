@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
@@ -17,5 +18,17 @@ public class MoneyTest {
 
         //then
         assertThat(money.calculateLottoCount()).isEqualTo(6);
+    }
+
+    @DisplayName("천원 미만으로 입력 시 예외 발생")
+    @Test
+    void 천원_미만으로_입력_시_예외_발생() {
+        //given
+        int input = 500;
+
+        //when&then
+        assertThatThrownBy(() -> new Money(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 최소 금액은 1,000원 이상이어야 합니다.");
     }
 }
