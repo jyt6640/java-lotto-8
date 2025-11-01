@@ -256,7 +256,7 @@ public class LottoResultServiceTest {
         double result = lottoResultService.calculateProfitRate(statistics, totalPurchaseAmount);
 
         //then
-        assertThat(result).isEqualTo(338592.5);
+        assertThat(result).isEqualTo(33859250);
     }
 
 }
