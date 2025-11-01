@@ -11,13 +11,13 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public int countMatches(List<Integer> numbers) {
-        return (int) numbers.stream()
+    public int countMatches(Lotto lotto) {
+        return (int) lotto.getNumbers().stream()
                 .filter(winningNumbers::contains)
                 .count();
     }
 
-    public boolean hasBonusNumber() {
-        return winningNumbers.contains(bonusNumber);
+    public boolean hasBonusNumber(Lotto lotto) {
+        return lotto.getNumbers().contains(bonusNumber);
     }
 }
