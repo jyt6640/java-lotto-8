@@ -32,6 +32,18 @@ public class MoneyTest {
                 .hasMessageContaining("[ERROR] 최소 금액은 1,000원 이상이어야 합니다.");
     }
 
+    @DisplayName("십만원 이상 입력 시 예외 발생")
+    @Test
+    void 십만원_이상_입력_시_예외_발생() {
+        //given
+        int input = 150000;
+
+        //when&then
+        assertThatThrownBy(() -> new Money(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 한 회차당 구매 가능 금액은 10만원입니다.");
+    }
+
     @DisplayName("천원 단위로 입력하지 않을 시 예외 발생")
     @Test
     void 천원_단위로_입력하지_않을_시_예외_발생() {
