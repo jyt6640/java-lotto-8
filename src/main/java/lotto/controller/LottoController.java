@@ -8,15 +8,18 @@ import lotto.domain.WinningLotto;
 import lotto.service.LottoPurchaseService;
 import lotto.service.LottoResultService;
 import lotto.service.dto.LottoPurchaseResult;
+import lotto.view.InputView;
 
 public class LottoController {
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
     private final LottoPurchaseService lottoPurchaseService;
     private final LottoResultService lottoResultService;
+    private final InputView inputView;
 
     public LottoController() {
-        this.inputHandler = new InputHandler();
+        this.inputView = new InputView();
+        this.inputHandler = new InputHandler(inputView);
         this.outputHandler = new OutputHandler();
         this.lottoPurchaseService = new LottoPurchaseService();
         this.lottoResultService = new LottoResultService();
