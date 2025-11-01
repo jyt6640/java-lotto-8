@@ -20,6 +20,6 @@ public class WinningNumberParser {
     }
 
     public static int parseBonusNumber(String input) {
-        return Integer.parseInt(input.strip());
+        return Integer.parseInt(input);
     }
 }
