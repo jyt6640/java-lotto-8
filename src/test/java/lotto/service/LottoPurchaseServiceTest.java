@@ -2,7 +2,7 @@ package lotto.service;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import lotto.domain.Lottos;
+import lotto.service.dto.LottoPurchaseResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,9 +27,9 @@ public class LottoPurchaseServiceTest {
     @ParameterizedTest
     void 구입_금액에_따라_로또를_발행(int inputAmount, int expectedCount) {
         //given&when
-        Lottos lottos = machine.purchase(inputAmount);
+        LottoPurchaseResult result = machine.purchase(inputAmount);
 
         //then
-        assertThat(lottos.getLottos().size()).isEqualTo(expectedCount);
+        assertThat(result.getLottos().getLottos().size()).isEqualTo(expectedCount);
     }
 }
