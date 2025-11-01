@@ -31,4 +31,15 @@ public class MoneyTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 최소 금액은 1,000원 이상이어야 합니다.");
     }
+
+    @DisplayName("천원 단위로 입력하지 않을 시 예외 발생")
+    @Test
+    void 천원_단위로_입력하지_않을_시_예외_발생() {
+        //given
+        int input = 1250;
+        assertThatThrownBy(() -> new Money(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 금액은 1,000원 단위이어야 합니다.");
+
+    }
 }
