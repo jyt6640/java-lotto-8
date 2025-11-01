@@ -31,6 +31,6 @@ public class InputHandler {
         if (price.matches("^[0-9]+$")) {
             return;
         }
-        throw new IllegalArgumentException("구매 금액은 숫자만 입력 가능합니다.");
+        throw new IllegalArgumentException("[ERROR] 구매 금액은 숫자만 입력 가능합니다.");
     }
 }
