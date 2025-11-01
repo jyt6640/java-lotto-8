@@ -4,18 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.service.dto.LottoPurchaseResult;
 import lotto.util.LottoNumberGenerator;
 
 public class LottoPurchaseService {
     public LottoPurchaseResult purchase(int amount) {
-        int purchaseCount  = calculateLottoCount(amount);
-        Lottos lottos = generateLottos(purchaseCount);
-        return new LottoPurchaseResult(purchaseCount, lottos);
-    }
-
-    private int calculateLottoCount(int amount) {
-        return amount / 1000;
+        Money money = new Money(amount);
+        int count = money.calculateLottoCount();
+        Lottos lottos = generateLottos(count);
+        return new LottoPurchaseResult(count, lottos);
     }
 
     private Lottos generateLottos(int count) {
