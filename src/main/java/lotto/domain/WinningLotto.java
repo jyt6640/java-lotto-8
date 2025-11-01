@@ -4,11 +4,12 @@ import java.util.List;
 
 public class WinningLotto {
     private final List<Integer> winningNumbers;
-    private final int bonusNumber;
+    private final BonusNumber bonusNumber;
 
     public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         this.winningNumbers = winningNumbers;
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = new BonusNumber(bonusNumber);
+        validateBonusNumber();
     }
 
     public int countMatches(Lotto lotto) {
@@ -17,7 +18,13 @@ public class WinningLotto {
                 .count();
     }
 
+    private void validateBonusNumber() {
+        if (bonusNumber.isDuplicatedIn(winningNumbers)) {
+            throw new IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+        }
+    }
+
     public boolean hasBonusNumber(Lotto lotto) {
-        return lotto.getNumbers().contains(bonusNumber);
+        return bonusNumber.isContainedIn(lotto);
     }
 }
