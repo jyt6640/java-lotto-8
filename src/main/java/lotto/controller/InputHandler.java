@@ -12,18 +12,18 @@ public class InputHandler {
     }
 
     public int readPurchaseAmount() {
-        String price = inputview.readPurchaseAmount();
+        String price = inputview.readPurchaseAmount().strip();
         validateOnlyNumber(price);
         return Integer.parseInt(price);
     }
 
     public List<Integer> readWinningNumbers() {
-        String winningNumbers = inputview.readWinningLottoNumbers();
+        String winningNumbers = inputview.readWinningLottoNumbers().strip();
         return WinningNumberParser.parseWinningNumbers(winningNumbers);
     }
 
     public int readBonusNumber() {
-        String bonusNumber = inputview.readBonusNumber();
+        String bonusNumber = inputview.readBonusNumber().strip();
         return WinningNumberParser.parseBonusNumber(bonusNumber);
     }
 
