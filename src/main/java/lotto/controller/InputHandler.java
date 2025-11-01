@@ -27,14 +27,15 @@ public class InputHandler {
     public int readBonusNumber() {
         String bonusNumber = inputview.readBonusNumber().strip();
         validateWhiteSpace(bonusNumber);
+        validateOnlyNumber(bonusNumber);
         return WinningNumberParser.parseBonusNumber(bonusNumber);
     }
 
-    private void validateOnlyNumber(String price) {
-        if (price.matches("^[0-9]+$")) {
+    private void validateOnlyNumber(String input) {
+        if (input.matches("^[0-9]+$")) {
             return;
         }
-        throw new IllegalArgumentException("[ERROR] 구매 금액은 숫자만 입력 가능합니다.");
+        throw new IllegalArgumentException("[ERROR] 숫자만 입력 가능합니다.");
     }
 
     private void validateWhiteSpace(String input) {
