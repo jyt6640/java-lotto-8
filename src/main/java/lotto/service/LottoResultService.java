@@ -43,6 +43,6 @@ public class LottoResultService {
             totalPrize += rank.getPrize() * count;
         }
 
-        return (double) totalPrize / totalPurchaseAmount;
+        return ((double) totalPrize / totalPurchaseAmount) * 100;
     }
 }
