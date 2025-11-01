@@ -14,11 +14,9 @@ public class LottoNumberGeneratorTest {
     void 로또_번호의_숫자가_1에서_45_범위_내에_있는지_확인() {
         //given
         List<Integer> input = LottoNumberGenerator.getLottoNumber(1);
-        List<Integer> winningNumberInput = LottoNumberGenerator.getWinningNumbers(1);
 
         //when&then
         assertThat(input.getFirst()).isBetween(1, 45);
-        assertThat(winningNumberInput.getFirst()).isBetween(1, 45);
     }
 
     @DisplayName("로또 번호 6개 뽑기")
@@ -44,30 +42,4 @@ public class LottoNumberGeneratorTest {
         //then
         assertThat(uniqueNumbers.size()).isEqualTo(6);
     }
-
-    @DisplayName("여섯 개의 당첨 번호 및 보너스 번호 뽑기")
-    @Test
-    void 여섯_개의_당첨_번호_및_보너스_번호_뽑기() {
-        //given
-        List<Integer> input = LottoNumberGenerator.getWinningNumbers(7);
-
-        //when&then
-        assertThat(input.size()).isEqualTo(7);
-    }
-
-    @DisplayName("중복되지 않는 당첨 번호 및 보너스 번호 발행")
-    @Test
-    void 중복되지_않는_당첨_번호_및_보너스_번호_발행() {
-        //given
-        List<Integer> input = LottoNumberGenerator.getWinningLotto();
-        Set<Integer> uniqueNumbers = new HashSet<>();
-
-        //when
-        uniqueNumbers.addAll(input);
-
-        //then
-        assertThat(uniqueNumbers.size()).isEqualTo(7);
-    }
-
-
 }
