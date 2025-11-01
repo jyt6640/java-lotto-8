@@ -11,6 +11,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class InputHandlerTest {
     private InputHandler inputHandler;
 
+    private void errorThrowsTest(Runnable runnable, String message) {
+        assertThatThrownBy(runnable::run)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(message);
+    }
+
     @DisplayName("구매 금액 문자열 입력 시 예외 발생")
     @Test
     void 구매_금액_문자열_입력_시_예외_발생() {
@@ -24,9 +30,23 @@ public class InputHandlerTest {
         inputHandler = new InputHandler(inputView);
 
         //when&then
-        assertThatThrownBy(inputHandler::readPurchaseAmount)
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 구매 금액은 숫자만 입력 가능합니다.");
+        errorThrowsTest(inputHandler::readPurchaseAmount, "[ERROR] 숫자만 입력 가능합니다.");
+    }
+
+    @DisplayName("보너스 번호 문자열 입력 시 예외 발생")
+    @Test
+    void 보너스_번호_문자열_입력_시_예외_발생() {
+        //given
+        InputView inputView = new InputView() {
+            @Override
+            public String readBonusNumber() {
+                return "av";
+            }
+        };
+        inputHandler = new InputHandler(inputView);
+
+        //when&then
+        errorThrowsTest(inputHandler::readBonusNumber, "[ERROR] 숫자만 입력 가능합니다.");
     }
 
     @DisplayName("구입 금액 입력 시 공백 입력은 예외 발생")
@@ -43,7 +63,7 @@ public class InputHandlerTest {
         inputHandler = new InputHandler(inputView);
 
         //when&then
-        assertWhiteSpaceThrows(inputHandler::readPurchaseAmount);
+        errorThrowsTest(inputHandler::readPurchaseAmount, "[ERROR] 입력값은 공백일 수 없습니다.");
     }
 
     @DisplayName("당첨 번호 입력 시 공백 입력은 예외 발생")
@@ -60,7 +80,7 @@ public class InputHandlerTest {
         inputHandler = new InputHandler(inputView);
 
         // when&then
-        assertWhiteSpaceThrows(inputHandler::readWinningNumbers);
+        errorThrowsTest(inputHandler::readWinningNumbers, "[ERROR] 입력값은 공백일 수 없습니다.");
     }
 
     @DisplayName("보너스 번호 입력 시 공백 입력은 예외 발생")
@@ -77,12 +97,6 @@ public class InputHandlerTest {
         inputHandler = new InputHandler(inputView);
 
         //when&then
-        assertWhiteSpaceThrows(inputHandler::readBonusNumber);
-    }
-
-    private void assertWhiteSpaceThrows(Runnable runnable) {
-        assertThatThrownBy(runnable::run)
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 입력값은 공백일 수 없습니다.");
+        errorThrowsTest(inputHandler::readBonusNumber, "[ERROR] 입력값은 공백일 수 없습니다.");
     }
 }
