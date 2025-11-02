@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -24,5 +25,15 @@ class LottoTest {
     void 로또_번호에_중복된_숫자가_있으면_예외가_발생한다() {
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 5)))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("번호가 1에서 45 범위를 벗어나면 예외 발생")
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1, 46, 50, 100})
+    void 번호가_범위를_벗어나면_예외_발생(int invalidNumber) {
+        //when&then
+        assertThatThrownBy(() -> new Lotto(List.of(invalidNumber, 2, 3, 4, 5, 6)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
     }
 }
