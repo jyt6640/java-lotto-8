@@ -1,10 +1,17 @@
 package lotto.controller;
 
+import static lotto.exception.ErrorMessage.INVALID_INPUT_NOT_BLANK;
+import static lotto.exception.ErrorMessage.INVALID_INPUT_ONLY_NUMBER;
+import static lotto.exception.ErrorMessage.INVALID_WINNING_NUMBER_FORMAT;
+
 import java.util.List;
 import lotto.util.InputParser;
 import lotto.view.InputView;
 
 public class InputHandler {
+    private static final String WINNING_NUMBERS_FORMAT_REGEX = "^(\\d+)(\\s*,\\s*\\d+)*$";
+    private static final String ONLY_NUMBER_REGEX = "^[0-9]+$";
+
     private final InputView inputview;
 
     public InputHandler(InputView inputview) {
@@ -33,21 +40,21 @@ public class InputHandler {
     }
 
     private void validateOnlyNumber(String input) {
-        if (input.matches("^[0-9]+$")) {
+        if (input.matches(ONLY_NUMBER_REGEX)) {
             return;
         }
-        throw new IllegalArgumentException("[ERROR] 숫자만 입력 가능합니다.");
+        throw new IllegalArgumentException(INVALID_INPUT_ONLY_NUMBER.toString());
     }
 
     private void validateWhiteSpace(String input) {
         if(input.isBlank()) {
-            throw new IllegalArgumentException("[ERROR] 입력값은 공백일 수 없습니다.");
+            throw new IllegalArgumentException(INVALID_INPUT_NOT_BLANK.toString());
         }
     }
 
     private void validateWinningNumberFormat(String input) {
-        if (!input.matches("^(\\d+)(\\s*,\\s*\\d+)*$")) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 쉼표(,)로 구분된 숫자 형식이어야 합니다.");
+        if (!input.matches(WINNING_NUMBERS_FORMAT_REGEX)) {
+            throw new IllegalArgumentException(INVALID_WINNING_NUMBER_FORMAT.toString());
         }
     }
 }

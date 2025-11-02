@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import static lotto.exception.ErrorMessage.INVALID_MAX_MONEY;
+import static lotto.exception.ErrorMessage.INVALID_MIN_MONEY;
+import static lotto.exception.ErrorMessage.INVALID_MONEY_UNIT;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -29,7 +32,7 @@ public class MoneyTest {
         //when&then
         assertThatThrownBy(() -> new Money(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 최소 금액은 1,000원 이상이어야 합니다.");
+                .hasMessageContaining(INVALID_MIN_MONEY.toString());
     }
 
     @DisplayName("십만원 이상 입력 시 예외 발생")
@@ -41,7 +44,7 @@ public class MoneyTest {
         //when&then
         assertThatThrownBy(() -> new Money(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 한 회차당 구매 가능 금액은 10만원입니다.");
+                .hasMessageContaining(INVALID_MAX_MONEY.toString());
     }
 
     @DisplayName("천원 단위로 입력하지 않을 시 예외 발생")
@@ -51,7 +54,7 @@ public class MoneyTest {
         int input = 1250;
         assertThatThrownBy(() -> new Money(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 금액은 1,000원 단위이어야 합니다.");
+                .hasMessageContaining(INVALID_MONEY_UNIT.toString());
 
     }
 

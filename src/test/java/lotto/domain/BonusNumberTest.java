@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.exception.ErrorMessage.DUPLICATE_BONUS_NUMBER;
+import static lotto.exception.ErrorMessage.INVALID_NUMBER_RANGE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -36,7 +38,7 @@ public class BonusNumberTest {
         //when&then
         assertThatThrownBy(() -> new BonusNumber(input, defaultWinningNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 1~45 범위 값만 허용됩니다.");
+                .hasMessageContaining(INVALID_NUMBER_RANGE.toString());
     }
 
     @DisplayName("당첨 번호와 보너스 번호가 겹치면 예외 발생")
@@ -45,6 +47,6 @@ public class BonusNumberTest {
         //when&then
         assertThatThrownBy(() -> new BonusNumber(6, defaultWinningNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+                .hasMessageContaining(DUPLICATE_BONUS_NUMBER.toString());
     }
 }

@@ -1,5 +1,6 @@
 package lotto.util;
 
+import static lotto.exception.ErrorMessage.INVALID_INT_RANGE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -43,6 +44,6 @@ public class InputParserTest {
         //when&then
         assertThatThrownBy(() -> InputParser.parseToInt(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 입력값은 int 범위를 넘어갈 수 없습니다.");
+                .hasMessageContaining(INVALID_INT_RANGE.toString());
     }
 }

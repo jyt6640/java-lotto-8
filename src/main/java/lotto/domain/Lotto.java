@@ -1,10 +1,18 @@
 package lotto.domain;
 
+import static lotto.exception.ErrorMessage.DUPLICATE_LOTTO_NUMBER;
+import static lotto.exception.ErrorMessage.INVALID_NUMBER_COUNT;
+import static lotto.exception.ErrorMessage.INVALID_NUMBER_RANGE;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Lotto {
+    private static final int LOTTO_DEFAULT_SIZE = 6;
+    private static final int MIN_RANGE = 1;
+    private static final int MAX_RANGE = 45;
+
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -21,13 +29,13 @@ public class Lotto {
     private void validateDuplicateNumber(List<Integer> numbers) {
         Set<Integer> validateSet = new HashSet<>(numbers);
         if(validateSet.size() != numbers.size()) {
-            throw new IllegalArgumentException("[ERROR] 중복된 숫자는 입력할 수 없습니다.");
+            throw new IllegalArgumentException(DUPLICATE_LOTTO_NUMBER.toString());
         }
     }
 
     private void validateNumberCount(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+        if (numbers.size() != LOTTO_DEFAULT_SIZE) {
+            throw new IllegalArgumentException(INVALID_NUMBER_COUNT.toString());
         }
     }
 
@@ -39,8 +47,8 @@ public class Lotto {
 
     private void validateNumberRange(List<Integer> numbers) {
         numbers.forEach(number -> {
-            if (number < 1 || number > 45) {
-                throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+            if (number < MIN_RANGE || number > MAX_RANGE) {
+                throw new IllegalArgumentException(INVALID_NUMBER_RANGE.toString());
             }
         });
     }

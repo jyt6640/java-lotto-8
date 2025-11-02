@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.exception.ErrorMessage.INVALID_LOTTOS_SIZE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -51,6 +52,6 @@ public class LottosTest {
         //when&then
         assertThatThrownBy(() -> new Lottos(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 로또는 하나 이상 생성해야 합니다.");
+                .hasMessageContaining(INVALID_LOTTOS_SIZE.toString());
     }
 }

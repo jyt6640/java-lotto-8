@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static lotto.exception.ErrorMessage.INVALID_NUMBER_RANGE;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,7 +32,7 @@ class LottoTest {
         //when&then
         assertThatThrownBy(() -> new Lotto(List.of(invalidNumber, 2, 3, 4, 5, 6)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+                .hasMessageContaining(INVALID_NUMBER_RANGE.toString());
     }
     
     @DisplayName("로또 번호 오름차순 정렬")

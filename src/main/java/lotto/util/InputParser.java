@@ -1,11 +1,15 @@
 package lotto.util;
 
+import static lotto.exception.ErrorMessage.INVALID_INT_RANGE;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class InputParser {
+    private final static String COMMA = ",";
+
     public static List<Integer> parseWinningNumbers(String input) {
-        return Arrays.stream(input.split(","))
+        return Arrays.stream(input.split(COMMA))
                 .map(String::strip)
                 .map(Integer::parseInt)
                 .toList();
@@ -15,7 +19,7 @@ public class InputParser {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 입력값은 int 범위를 넘어갈 수 없습니다.");
+            throw new IllegalArgumentException(INVALID_INT_RANGE.toString());
         }
     }
 }

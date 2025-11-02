@@ -1,8 +1,12 @@
 package lotto.domain;
 
+import static lotto.exception.ErrorMessage.INVALID_LOTTOS_SIZE;
+
 import java.util.List;
 
 public class Lottos {
+    private static final int EMPTY_SIZE = 0;
+
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
@@ -15,8 +19,8 @@ public class Lottos {
     }
 
     public void validateEmptyLotto(List<Lotto> lottos) {
-        if (lottos.size() == 0) {
-            throw new IllegalArgumentException("[ERROR] 로또는 하나 이상 생성해야 합니다.");
+        if (lottos.size() == EMPTY_SIZE) {
+            throw new IllegalArgumentException(INVALID_LOTTOS_SIZE.toString());
         }
     }
 }

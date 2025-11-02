@@ -10,6 +10,8 @@ public enum Rank {
     FIFTH(FOURTH, 3, false, 5_000L),
     NONE(FIFTH, 0, false, 0L);
 
+    private static final int BONUS_AVAILABLE_FROM_MATCH = 2;
+
     private Rank upperRank;
     private final int matchCount;
     private final boolean hasBonusNumber;
@@ -24,7 +26,7 @@ public enum Rank {
 
     public static Rank of(int matchCounts, boolean hasBonusNumber) {
         Rank baseRank = fromMatchCount(matchCounts, hasBonusNumber);
-        if (hasBonusNumber && matchCounts >= 2) {
+        if (hasBonusNumber && matchCounts >= BONUS_AVAILABLE_FROM_MATCH) {
             return baseRank.upgrade();
         }
         return baseRank;
