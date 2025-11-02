@@ -1,17 +1,14 @@
 package lotto.domain;
 
-import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
     @Test
@@ -35,5 +32,18 @@ class LottoTest {
         assertThatThrownBy(() -> new Lotto(List.of(invalidNumber, 2, 3, 4, 5, 6)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    }
+    
+    @DisplayName("로또 번호 오름차순 정렬")
+    @Test
+    void 로또_번호_오름차순_정렬() {
+        //given
+        Lotto input = new Lotto(List.of(7, 6, 5, 4, 3, 2));
+
+        //when
+        List<Integer> result = input.getNumbers();
+
+        //then
+        assertThat(result).containsExactly(2, 3, 4, 5, 6, 7);
     }
 }
