@@ -19,4 +19,10 @@ public class WinningLotto {
     public boolean hasBonusNumber(Lotto lotto) {
         return bonusNumber.isContainedIn(lotto);
     }
+
+    public Rank determineRank(Lotto lotto) {
+         int matchCount = countMatches(lotto);
+         boolean hasBonus = hasBonusNumber(lotto);
+         return Rank.of(matchCount, hasBonus);
+    }
 }
