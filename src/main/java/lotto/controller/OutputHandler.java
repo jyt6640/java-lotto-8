@@ -9,13 +9,17 @@ import lotto.view.OutputView;
 public class OutputHandler {
     private OutputView outputView = new OutputView();
 
-    public void printMyLottos(LottoPurchaseResult result) {
+    public void showMyLottos(LottoPurchaseResult result) {
         int purchaseCount = result.getCount();
         Lottos lottos = result.getLottos();
         outputView.printMyLottos(purchaseCount, lottos);
     }
 
-    public void printResult(Map<Rank, Integer> statistics, double profitRate) {
+    public void showResult(Map<Rank, Integer> statistics, double profitRate) {
         outputView.printResult(statistics, profitRate);
+    }
+
+    public void showError(IllegalArgumentException e) {
+        outputView.printError(e);
     }
 }

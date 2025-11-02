@@ -33,14 +33,14 @@ public class LottoController {
                 int purchaseAmount = inputHandler.readPurchaseAmount();
                 return lottoPurchaseService.purchase(purchaseAmount);
             });
-            outputHandler.printMyLottos(result);
+            outputHandler.showMyLottos(result);
 
             WinningLotto winningLotto = createWinningLottoSafely();
 
             Map<Rank, Integer> statistics = lottoResultService.getStatistics(winningLotto, result.getLottos());
             double profitRate = lottoResultService.calculateProfitRate(statistics, result.getMoney());
 
-            outputHandler.printResult(statistics, profitRate);
+            outputHandler.showResult(statistics, profitRate);
         } finally {
             Console.close();
         }
@@ -51,7 +51,7 @@ public class LottoController {
             try {
                 return supplier.get();
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                outputHandler.showError(e);
             }
         }
     }

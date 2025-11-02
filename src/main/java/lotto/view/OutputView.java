@@ -24,4 +24,8 @@ public class OutputView {
         System.out.println("6개 일치 (2,000,000,000원) - " + statistics.get(Rank.FIRST) + "개");
         System.out.printf("총 수익률은 %.1f%%입니다.%n", profitRate);
     }
+
+    public void printError(IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+    }
 }
