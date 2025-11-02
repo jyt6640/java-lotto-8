@@ -3,7 +3,7 @@ package lotto.util;
 import java.util.Arrays;
 import java.util.List;
 
-public class WinningNumberParser {
+public class InputParser {
     public static int extractBonusNumber(List<Integer> getWinningNumbers) {
         return getWinningNumbers.getLast();
     }
@@ -19,7 +19,11 @@ public class WinningNumberParser {
                 .toList();
     }
 
-    public static int parseBonusNumber(String input) {
-        return Integer.parseInt(input);
+    public static int parseToInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 입력값은 int 범위를 넘어갈 수 없습니다.");
+        }
     }
 }

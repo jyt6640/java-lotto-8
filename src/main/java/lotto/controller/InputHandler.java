@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.util.WinningNumberParser;
+import lotto.util.InputParser;
 import lotto.view.InputView;
 
 public class InputHandler {
@@ -15,21 +15,21 @@ public class InputHandler {
         String price = inputview.readPurchaseAmount().strip();
         validateWhiteSpace(price);
         validateOnlyNumber(price);
-        return Integer.parseInt(price);
+        return InputParser.parseToInt(price);
     }
 
     public List<Integer> readWinningNumbers() {
         String winningNumbers = inputview.readWinningLottoNumbers().strip();
         validateWhiteSpace(winningNumbers);
         validateWinningNumberFormat(winningNumbers);
-        return WinningNumberParser.parseWinningNumbers(winningNumbers);
+        return InputParser.parseWinningNumbers(winningNumbers);
     }
 
     public int readBonusNumber() {
         String bonusNumber = inputview.readBonusNumber().strip();
         validateWhiteSpace(bonusNumber);
         validateOnlyNumber(bonusNumber);
-        return WinningNumberParser.parseBonusNumber(bonusNumber);
+        return InputParser.parseToInt(bonusNumber);
     }
 
     private void validateOnlyNumber(String input) {
