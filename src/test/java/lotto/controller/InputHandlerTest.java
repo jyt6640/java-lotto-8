@@ -99,4 +99,30 @@ public class InputHandlerTest {
         //when&then
         errorThrowsTest(inputHandler::readBonusNumber, "[ERROR] 입력값은 공백일 수 없습니다.");
     }
+
+    @DisplayName("당첨 번호 입력 시 올바른 형식이 아니면 예외 발생")
+    @ValueSource(strings = {
+            "1 2 3 4 5 6",
+            "1,2,3,4,5,",
+            ",1,2,3,4,5",
+            "1,,2,3,4,5",
+            "1,2,3,a,5,6",
+            "1,2,3,4,5,6,",
+            "1, 2, ,3,4,5",
+            "1,2,3,4,5.6"
+    })
+    @ParameterizedTest
+    void 당첨_번호_입력_시_올바른_형식이_아니면_예외_발생(String input) {
+        // given
+        InputView inputView = new InputView() {
+            @Override
+            public String readWinningLottoNumbers() {
+                return input;
+            }
+        };
+        inputHandler = new InputHandler(inputView);
+
+        // when & then
+        errorThrowsTest(inputHandler::readWinningNumbers, "[ERROR] 당첨 번호는 쉼표(,)로 구분된 숫자 형식이어야 합니다.");
+    }
 }
