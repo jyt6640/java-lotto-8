@@ -1,7 +1,7 @@
 // lotto/config/AppConfig.java
 package lotto.common.config;
 
-import lotto.dto.mapper.OutputMapper;
+import lotto.service.mapper.OutputMapper;
 import lotto.view.handler.InputHandler;
 import lotto.controller.LottoController;
 import lotto.view.handler.OutputHandler;
@@ -37,7 +37,8 @@ public class AppConfig {
     public LottoGameService lottoGameService() {
         return new LottoGameService(
                 lottoPurchaseService(),
-                lottoResultService()
+                lottoResultService(),
+                outputMapper()
         );
     }
 
@@ -47,8 +48,7 @@ public class AppConfig {
 
     public OutputHandler outputHandler() {
         return new OutputHandler(
-                outputView(),
-                outputMapper()
+                outputView()
         );
     }
 

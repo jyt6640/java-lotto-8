@@ -1,4 +1,4 @@
-package lotto.dto.mapper;
+package lotto.service.mapper;
 
 import java.util.Comparator;
 import java.util.List;

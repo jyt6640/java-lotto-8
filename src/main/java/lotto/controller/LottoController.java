@@ -1,12 +1,12 @@
 package lotto.controller;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Map;
+import java.util.List;
 import java.util.function.Supplier;
 import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
-import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
+import lotto.dto.WinningStatistics;
 import lotto.service.LottoGameService;
 import lotto.dto.LottoPurchaseResult;
 import lotto.view.handler.InputHandler;
@@ -71,14 +71,13 @@ public class LottoController {
     }
 
     private void showGameResult(LottoPurchaseResult result, WinningLotto winningLotto) {
-        Map<Rank, Integer> statistics = gameService.calculateStatistics(
-                winningLotto,
-                result.getLottos()
-        );
+        List<WinningStatistics> results = gameService.getWinningStatistics(winningLotto, result.getLottos());
+
         double profitRate = gameService.calculateProfitRate(
-                statistics,
+                gameService.calculateStatistics(winningLotto, result.getLottos()),
                 result.getMoney()
         );
-        outputHandler.showResult(statistics, profitRate);
+
+        outputHandler.showResult(results, profitRate);
     }
 }

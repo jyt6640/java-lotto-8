@@ -1,20 +1,15 @@
 package lotto.view.handler;
 
 import java.util.List;
-import java.util.Map;
-import lotto.domain.Rank;
 import lotto.dto.LottoPurchaseResult;
 import lotto.dto.WinningStatistics;
-import lotto.dto.mapper.OutputMapper;
 import lotto.view.OutputView;
 
 public class OutputHandler {
     private final OutputView outputView;
-    private final OutputMapper outputMapper;
 
-    public OutputHandler(OutputView outputView, OutputMapper outputMapper) {
+    public OutputHandler(OutputView outputView) {
         this.outputView = outputView;
-        this.outputMapper = outputMapper;
     }
 
     public void showMyLottos(LottoPurchaseResult result) {
@@ -23,8 +18,7 @@ public class OutputHandler {
         outputView.printMyLottos(purchaseCount, lottoNumbers);
     }
 
-    public void showResult(Map<Rank, Integer> statistics, double profitRate) {
-        List<WinningStatistics> results = outputMapper.mapToWinningStatistics(statistics);
+    public void showResult(List<WinningStatistics> results, double profitRate) {
         outputView.printResult(results, profitRate);
     }
 
