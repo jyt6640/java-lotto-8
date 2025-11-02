@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -41,4 +42,15 @@ public class LottosTest {
         assertThat(result.getLottos().size()).isEqualTo(4);
     }
 
+    @DisplayName("로또 개수가 1개 미만일 때 예외 발생")
+    @Test
+    void 로또_개수가_1개_미만일_때_예외_발생() {
+        //given
+        List<Lotto> input = List.of();
+
+        //when&then
+        assertThatThrownBy(() -> new Lottos(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 로또는 하나 이상 생성해야 합니다.");
+    }
 }
