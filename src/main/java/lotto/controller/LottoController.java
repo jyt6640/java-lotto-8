@@ -55,11 +55,9 @@ public class LottoController {
         Lotto winningNumbers = retryOnException(() ->
                 new Lotto(inputHandler.readWinningNumbers())
         );
-
         BonusNumber bonusNumber = retryOnException(() ->
                 new BonusNumber(inputHandler.readBonusNumber(), winningNumbers)
         );
-
         return new WinningLotto(winningNumbers, bonusNumber);
     }
 
@@ -72,12 +70,10 @@ public class LottoController {
 
     private void showGameResult(LottoPurchaseResult result, WinningLotto winningLotto) {
         List<WinningStatistics> results = gameService.getWinningStatistics(winningLotto, result.getLottos());
-
         double profitRate = gameService.calculateProfitRate(
                 gameService.calculateStatistics(winningLotto, result.getLottos()),
                 result.getMoney()
         );
-
         outputHandler.showResult(results, profitRate);
     }
 }

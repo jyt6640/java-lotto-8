@@ -30,5 +30,4 @@ public class LottoPurchaseResult {
     public List<List<Integer>> extractLottoNumbers() {
         return lottos.toNumbers();
     }
-
 }

@@ -1,4 +1,3 @@
-// lotto/config/AppConfig.java
 package lotto.common.config;
 
 import lotto.service.mapper.OutputMapper;
