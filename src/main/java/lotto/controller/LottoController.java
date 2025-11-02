@@ -3,6 +3,7 @@ package lotto.controller;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.service.LottoPurchaseService;
@@ -27,13 +28,11 @@ public class LottoController {
 
     public void run() {
         try {
-            int purchaseAmount = inputHandler.readPurchaseAmount();
+            int purchaseAmount = retryOnException(inputHandler::readPurchaseAmount);
             LottoPurchaseResult result = lottoPurchaseService.purchase(purchaseAmount);
             outputHandler.printMyLottos(result);
 
-            List<Integer> winningNumbers = inputHandler.readWinningNumbers();
-            int bonusNumber = inputHandler.readBonusNumber();
-            WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+            WinningLotto winningLotto = createWinningLottoSafely();
 
             Map<Rank, Integer> statistics = lottoResultService.getStatistics(winningLotto, result.getLottos());
             double profitRate = lottoResultService.calculateProfitRate(statistics, purchaseAmount);
@@ -41,6 +40,28 @@ public class LottoController {
             outputHandler.printResult(statistics, profitRate);
         } finally {
             Console.close();
+        }
+    }
+
+    private <T> T retryOnException(Supplier<T> supplier) {
+        while (true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private WinningLotto createWinningLottoSafely() {
+        while (true) {
+            try {
+                List<Integer> winningNumbers = inputHandler.readWinningNumbers();
+                int bonusNumber = inputHandler.readBonusNumber();
+                return new WinningLotto(winningNumbers, bonusNumber);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
