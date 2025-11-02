@@ -20,7 +20,7 @@ public class Lotto {
     private void validateDuplicateNumber(List<Integer> numbers) {
         Set<Integer> validateSet = new HashSet<>(numbers);
         if(validateSet.size() != numbers.size()) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호에 중복된 숫자가 있습니다.");
+            throw new IllegalArgumentException("[ERROR] 중복된 숫자는 입력할 수 없습니다.");
         }
     }
 

@@ -20,10 +20,6 @@ public class BonusNumber {
         }
     }
 
-    public boolean isDuplicatedIn(List<Integer> numbers) {
-        return numbers.contains(bonusNumber);
-    }
-
     public boolean isContainedIn(Lotto lotto) {
         return lotto.contains(bonusNumber);
     }
