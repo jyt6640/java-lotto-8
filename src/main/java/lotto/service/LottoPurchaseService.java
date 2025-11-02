@@ -5,7 +5,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.service.dto.LottoPurchaseResult;
+import lotto.dto.LottoPurchaseResult;
 import lotto.util.LottoNumberGenerator;
 
 public class LottoPurchaseService {

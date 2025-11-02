@@ -3,7 +3,7 @@ package lotto.controller;
 import java.util.Map;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
-import lotto.service.dto.LottoPurchaseResult;
+import lotto.dto.LottoPurchaseResult;
 import lotto.view.OutputView;
 
 public class OutputHandler {
