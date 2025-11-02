@@ -12,6 +12,7 @@ public class OutputView {
     private static final String PROFIT_RATE_RESULT = "총 수익률은 %.1f%%입니다.%n";
 
     public void printMyLottos(int purchaseCount, List<List<Integer>> lottoNumbers) {
+        System.out.println();
         System.out.println(purchaseCount + BUY_OUTPUT);
         lottoNumbers.forEach(System.out::println);
     }
