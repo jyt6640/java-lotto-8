@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import static lotto.exception.ErrorMessage.DUPLICATE_LOTTO_NUMBER;
-import static lotto.exception.ErrorMessage.INVALID_NUMBER_COUNT;
-import static lotto.exception.ErrorMessage.INVALID_NUMBER_RANGE;
+import static lotto.domain.exception.ErrorMessage.DUPLICATE_LOTTO_NUMBER;
+import static lotto.domain.exception.ErrorMessage.INVALID_NUMBER_COUNT;
+import static lotto.domain.exception.ErrorMessage.INVALID_NUMBER_RANGE;
 
 import java.util.HashSet;
 import java.util.List;

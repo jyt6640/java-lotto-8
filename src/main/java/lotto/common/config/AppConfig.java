@@ -1,12 +1,12 @@
 // lotto/config/AppConfig.java
-package lotto.config;
+package lotto.common.config;
 
 import lotto.dto.mapper.OutputMapper;
 import lotto.view.handler.InputHandler;
 import lotto.controller.LottoController;
 import lotto.view.handler.OutputHandler;
-import lotto.generator.LottoNumberGenerator;
-import lotto.generator.NumberGenerator;
+import lotto.domain.generator.LottoNumberGenerator;
+import lotto.domain.generator.NumberGenerator;
 import lotto.service.LottoGameService;
 import lotto.service.LottoPurchaseService;
 import lotto.service.LottoResultService;

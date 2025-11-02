@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import static lotto.exception.ErrorMessage.DUPLICATE_BONUS_NUMBER;
-import static lotto.exception.ErrorMessage.INVALID_NUMBER_RANGE;
+import static lotto.domain.exception.ErrorMessage.DUPLICATE_BONUS_NUMBER;
+import static lotto.domain.exception.ErrorMessage.INVALID_NUMBER_RANGE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 

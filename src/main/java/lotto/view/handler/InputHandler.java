@@ -1,11 +1,11 @@
 package lotto.view.handler;
 
-import static lotto.exception.ErrorMessage.INVALID_INPUT_NOT_BLANK;
-import static lotto.exception.ErrorMessage.INVALID_INPUT_ONLY_NUMBER;
-import static lotto.exception.ErrorMessage.INVALID_WINNING_NUMBER_FORMAT;
+import static lotto.domain.exception.ErrorMessage.INVALID_INPUT_NOT_BLANK;
+import static lotto.domain.exception.ErrorMessage.INVALID_INPUT_ONLY_NUMBER;
+import static lotto.domain.exception.ErrorMessage.INVALID_WINNING_NUMBER_FORMAT;
 
 import java.util.List;
-import lotto.util.InputParser;
+import lotto.common.util.InputParser;
 import lotto.view.InputView;
 
 public class InputHandler {

@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static lotto.exception.ErrorMessage.INVALID_NUMBER_RANGE;
+import static lotto.domain.exception.ErrorMessage.INVALID_NUMBER_RANGE;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,10 +1,11 @@
-package lotto.util;
+package lotto.common.util;
 
-import static lotto.exception.ErrorMessage.INVALID_INT_RANGE;
+import static lotto.domain.exception.ErrorMessage.INVALID_INT_RANGE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.List;
+import lotto.common.util.InputParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

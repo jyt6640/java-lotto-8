@@ -6,7 +6,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.dto.LottoPurchaseResult;
-import lotto.generator.NumberGenerator;
+import lotto.domain.generator.NumberGenerator;
 
 public class LottoPurchaseService {
     private final NumberGenerator numberGenerator;

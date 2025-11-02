@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import lotto.dto.LottoPurchaseResult;
-import lotto.generator.FixedNumberGenerator;
-import lotto.generator.NumberGenerator;
+import lotto.domain.generator.FixedNumberGenerator;
+import lotto.domain.generator.NumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

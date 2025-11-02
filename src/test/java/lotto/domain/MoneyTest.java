@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import static lotto.exception.ErrorMessage.INVALID_MAX_MONEY;
-import static lotto.exception.ErrorMessage.INVALID_MIN_MONEY;
-import static lotto.exception.ErrorMessage.INVALID_MONEY_UNIT;
+import static lotto.domain.exception.ErrorMessage.INVALID_MAX_MONEY;
+import static lotto.domain.exception.ErrorMessage.INVALID_MIN_MONEY;
+import static lotto.domain.exception.ErrorMessage.INVALID_MONEY_UNIT;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

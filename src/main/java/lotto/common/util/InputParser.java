@@ -1,6 +1,6 @@
-package lotto.util;
+package lotto.common.util;
 
-import static lotto.exception.ErrorMessage.INVALID_INT_RANGE;
+import static lotto.domain.exception.ErrorMessage.INVALID_INT_RANGE;
 
 import java.util.Arrays;
 import java.util.List;

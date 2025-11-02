@@ -1,4 +1,4 @@
-package lotto.exception;
+package lotto.domain.exception;
 
 public enum ErrorMessage {
     INVALID_INPUT_NOT_BLANK("입력값은 공백일 수 없습니다."),

@@ -1,8 +1,8 @@
 package lotto.controller;
 
-import static lotto.exception.ErrorMessage.INVALID_INPUT_NOT_BLANK;
-import static lotto.exception.ErrorMessage.INVALID_INPUT_ONLY_NUMBER;
-import static lotto.exception.ErrorMessage.INVALID_WINNING_NUMBER_FORMAT;
+import static lotto.domain.exception.ErrorMessage.INVALID_INPUT_NOT_BLANK;
+import static lotto.domain.exception.ErrorMessage.INVALID_INPUT_ONLY_NUMBER;
+import static lotto.domain.exception.ErrorMessage.INVALID_WINNING_NUMBER_FORMAT;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import lotto.view.InputView;

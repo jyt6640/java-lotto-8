@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.exception.ErrorMessage.INVALID_LOTTOS_SIZE;
+import static lotto.domain.exception.ErrorMessage.INVALID_LOTTOS_SIZE;
 
 import java.util.List;
 

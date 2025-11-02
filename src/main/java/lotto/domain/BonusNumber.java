@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import static lotto.exception.ErrorMessage.DUPLICATE_BONUS_NUMBER;
-import static lotto.exception.ErrorMessage.INVALID_NUMBER_RANGE;
+import static lotto.domain.exception.ErrorMessage.DUPLICATE_BONUS_NUMBER;
+import static lotto.domain.exception.ErrorMessage.INVALID_NUMBER_RANGE;
 
 public class BonusNumber {
     private static final int MIN_RANGE = 1;

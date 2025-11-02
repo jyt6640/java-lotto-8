@@ -1,6 +1,7 @@
-package lotto.generator;
+package lotto.domain.generator;
 
 import java.util.List;
+import lotto.domain.generator.NumberGenerator;
 
 public class FixedNumberGenerator implements NumberGenerator {
     private final List<Integer> numbers;

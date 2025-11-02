@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import static lotto.exception.ErrorMessage.INVALID_MAX_MONEY;
-import static lotto.exception.ErrorMessage.INVALID_MIN_MONEY;
-import static lotto.exception.ErrorMessage.INVALID_MONEY_UNIT;
+import static lotto.domain.exception.ErrorMessage.INVALID_MAX_MONEY;
+import static lotto.domain.exception.ErrorMessage.INVALID_MIN_MONEY;
+import static lotto.domain.exception.ErrorMessage.INVALID_MONEY_UNIT;
 
 public class Money {
     private static final int LOTTO_PRICE = 1000;
