@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class WinningNumberParserTest {
+public class InputParserTest {
     @DisplayName("보너스 번호 1개 분리")
     @Test
     void 보너스_번호_1개_분리() {
@@ -14,7 +14,7 @@ public class WinningNumberParserTest {
         List<Integer> input = List.of(1, 2, 3, 4, 5, 6, 7);
 
         //when
-        int bonusNumber = WinningNumberParser.extractBonusNumber(input);
+        int bonusNumber = InputParser.extractBonusNumber(input);
 
         //then
         assertThat(bonusNumber).isEqualTo(input.getLast());
@@ -27,7 +27,7 @@ public class WinningNumberParserTest {
         List<Integer> input = List.of(1, 2, 3, 4, 5, 6, 7);
 
         //when
-        List<Integer> winningNumbers = WinningNumberParser.extractWinningNumbers(input);
+        List<Integer> winningNumbers = InputParser.extractWinningNumbers(input);
 
         //then
         assertThat(winningNumbers.size()).isEqualTo(6);
@@ -41,20 +41,20 @@ public class WinningNumberParserTest {
         String input = "1,2,3,4,5,6";
 
         //when
-        List<Integer> result = WinningNumberParser.parseWinningNumbers(input);
+        List<Integer> result = InputParser.parseWinningNumbers(input);
 
         //then
         assertThat(result).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
     }
 
-    @DisplayName("보너스 번호 입력 후 int로 변환")
+    @DisplayName("문자열 입력 후 int로 변환")
     @Test
-    void 보너스_번호_입력_후_int로_변환() {
+    void 문자열_입력_후_int로_변환() {
         //given
         String input = "7";
 
         //when
-        int result = WinningNumberParser.parseBonusNumber(input);
+        int result = InputParser.parseToInt(input);
 
         //then
         assertThat(result).isEqualTo(7);
