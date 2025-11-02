@@ -1,5 +1,6 @@
 package lotto.dto;
 
+import java.util.List;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 
@@ -25,4 +26,9 @@ public class LottoPurchaseResult {
     public Money getMoney() {
         return money;
     }
+
+    public List<List<Integer>> extractLottoNumbers() {
+        return lottos.toNumbers();
+    }
+
 }

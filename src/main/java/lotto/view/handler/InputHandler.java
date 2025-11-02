@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto.view.handler;
 
 import static lotto.exception.ErrorMessage.INVALID_INPUT_NOT_BLANK;
 import static lotto.exception.ErrorMessage.INVALID_INPUT_ONLY_NUMBER;

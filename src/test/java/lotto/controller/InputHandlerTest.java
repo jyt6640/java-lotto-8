@@ -6,6 +6,7 @@ import static lotto.exception.ErrorMessage.INVALID_WINNING_NUMBER_FORMAT;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import lotto.view.InputView;
+import lotto.view.handler.InputHandler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -23,4 +23,11 @@ public class Lottos {
             throw new IllegalArgumentException(INVALID_LOTTOS_SIZE.toString());
         }
     }
+
+    public List<List<Integer>> toNumbers() {
+        return lottos.stream()
+                .map(Lotto::getNumbers)
+                .toList();
+    }
+
 }

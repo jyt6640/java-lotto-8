@@ -9,6 +9,8 @@ import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.service.LottoGameService;
 import lotto.dto.LottoPurchaseResult;
+import lotto.view.handler.InputHandler;
+import lotto.view.handler.OutputHandler;
 
 
 public class LottoController {
