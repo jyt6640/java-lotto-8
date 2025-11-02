@@ -6,6 +6,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
+import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
@@ -36,7 +37,7 @@ public class LottoResultServiceTest {
     ) {
         //given
         Lotto myLotto = new Lotto(myNumber);
-        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), new BonusNumber(bonusNumber));
 
         //when
         Rank result = lottoResultService.getRank(winningLotto, myLotto);
@@ -112,7 +113,7 @@ public class LottoResultServiceTest {
                 .map(Lotto::new)
                 .toList();
         Lottos input = new Lottos(lottos);
-        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), new BonusNumber(bonusNumber));
 
         //when
         Map<Rank, Integer> result = lottoResultService.getStatistics(winningLotto, input);

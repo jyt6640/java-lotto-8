@@ -1,9 +1,10 @@
 package lotto.controller;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+import lotto.domain.BonusNumber;
+import lotto.domain.Lotto;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.service.LottoPurchaseService;
@@ -29,7 +30,7 @@ public class LottoController {
     public void run() {
         try {
             int purchaseAmount = retryOnException(inputHandler::readPurchaseAmount);
-            LottoPurchaseResult result = lottoPurchaseService.purchase(purchaseAmount);
+            LottoPurchaseResult result = retryOnException(() -> lottoPurchaseService.purchase(purchaseAmount));
             outputHandler.printMyLottos(result);
 
             WinningLotto winningLotto = createWinningLottoSafely();
@@ -56,9 +57,13 @@ public class LottoController {
     private WinningLotto createWinningLottoSafely() {
         while (true) {
             try {
-                List<Integer> winningNumbers = inputHandler.readWinningNumbers();
-                int bonusNumber = inputHandler.readBonusNumber();
-                return new WinningLotto(winningNumbers, bonusNumber);
+                Lotto winningLotto = retryOnException(() ->
+                        new Lotto(inputHandler.readWinningNumbers())
+                );
+                BonusNumber bonusNumber = retryOnException(() ->
+                        new BonusNumber(inputHandler.readBonusNumber())
+                );
+                return new WinningLotto(winningLotto, bonusNumber);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

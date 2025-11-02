@@ -22,7 +22,7 @@ public class WinningLottoTest {
             int expectedCount
     ) {
         //given
-        WinningLotto input = new WinningLotto(winningNumber, bonusNumber);
+        WinningLotto input = new WinningLotto(new Lotto(winningNumber), new BonusNumber(bonusNumber));
 
         //when
         int result = input.countMatches(myNumbers);
@@ -88,7 +88,7 @@ public class WinningLottoTest {
     @Test
     void 보너스_번호가_있는지_확인() {
         //given
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)),new BonusNumber(7));
         Lotto myLotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
 
         //when
@@ -101,7 +101,7 @@ public class WinningLottoTest {
     @Test
     void 당첨_번호와_보너스_번호가_겹치면_예외_발생() {
         //when&then
-        assertThatThrownBy(() -> new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 6))
+        assertThatThrownBy(() -> new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)),new BonusNumber(6)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
