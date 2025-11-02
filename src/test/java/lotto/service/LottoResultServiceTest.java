@@ -34,13 +34,12 @@ public class LottoResultServiceTest {
     @ParameterizedTest
     void 로또_번호와_당첨_번호를_비교하여_순위_반환(
         List<Integer> myNumber,
-        List<Integer> winningNumber,
         int bonusNumber,
         Rank expectedRank
     ) {
         //given
         Lotto myLotto = new Lotto(myNumber);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), new BonusNumber(bonusNumber, defatultWinningNumber));
+        WinningLotto winningLotto = new WinningLotto(defatultWinningNumber, new BonusNumber(bonusNumber, defatultWinningNumber));
 
         //when
         Rank result = lottoResultService.getRank(winningLotto, myLotto);
@@ -53,49 +52,41 @@ public class LottoResultServiceTest {
         return Stream.of(
                 Arguments.of(
                         List.of(1, 2, 3, 4, 5, 6),
-                        List.of(1, 2, 3, 4, 5, 6),
                         7,
                         Rank.FIRST
                 ),
                 Arguments.of(
                         List.of(1, 2, 3, 4, 5, 7),
-                        List.of(1, 2, 3, 4, 5, 6),
                         7,
                         Rank.SECOND
                 ),
                 Arguments.of(
                         List.of(1, 2, 3, 4, 5, 10),
-                        List.of(1, 2, 3, 4, 5, 6),
                         7,
                         Rank.THIRD
                 ),
                 Arguments.of(
                         List.of(1, 2, 3, 4, 10, 11),
-                        List.of(1, 2, 3, 4, 5, 6),
                         7,
                         Rank.FOURTH
                 ),
                 Arguments.of(
                         List.of(1, 2, 3, 10, 11, 12),
-                        List.of(1, 2, 3, 4, 5, 6),
                         7,
                         Rank.FIFTH
                 ),
                 Arguments.of(
                         List.of(1, 2, 7, 10, 11, 12),
-                        List.of(1, 2, 3, 4, 5, 6),
                         7,
                         Rank.FIFTH
                 ),
                 Arguments.of(
                         List.of(1, 2, 10, 11, 12, 13),
-                        List.of(1, 2, 3, 4, 5, 6),
                         7,
                         Rank.NONE
                 ),
                 Arguments.of(
                         List.of(10, 11, 12, 13, 14, 15),
-                        List.of(1, 2, 3, 4, 5, 6),
                         7,
                         Rank.NONE
                 )
