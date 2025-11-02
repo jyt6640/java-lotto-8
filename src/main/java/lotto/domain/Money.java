@@ -35,4 +35,8 @@ public class Money {
             throw new IllegalArgumentException("[ERROR] 금액은 1,000원 단위이어야 합니다.");
         }
     }
+
+    public double calculateProfitRate(long totalPrize) {
+        return ((double) totalPrize / amount) * 100;
+    }
 }

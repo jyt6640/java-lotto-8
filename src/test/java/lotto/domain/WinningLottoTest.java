@@ -5,6 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,17 +13,24 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class WinningLottoTest {
+    private Lotto defaultWinningNumber;
+
+    @BeforeEach
+    void setUp() {
+        defaultWinningNumber = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+    }
+
     @DisplayName("당첨 번호와 일치하는 개수 반환")
     @MethodSource("provideMatchCases")
     @ParameterizedTest
     void 당첨_번호와_일치하는_개수_반환(
             Lotto myNumbers,
-            List<Integer> winningNumber,
+            List<Integer> winningNumbers,
             int bonusNumber,
             int expectedCount
     ) {
         //given
-        WinningLotto input = new WinningLotto(new Lotto(winningNumber), new BonusNumber(bonusNumber));
+        WinningLotto input = new WinningLotto(new Lotto(winningNumbers), new BonusNumber(bonusNumber, new Lotto(winningNumbers)));
 
         //when
         int result = input.countMatches(myNumbers);
@@ -88,21 +96,12 @@ public class WinningLottoTest {
     @Test
     void 보너스_번호가_있는지_확인() {
         //given
-        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)),new BonusNumber(7));
+        WinningLotto winningLotto = new WinningLotto(defaultWinningNumber, new BonusNumber(7, defaultWinningNumber));
         Lotto myLotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
 
         //when
         boolean result = winningLotto.hasBonusNumber(myLotto);
 
         assertThat(result).isTrue();
-    }
-
-    @DisplayName("당첨 번호와 보너스 번호가 겹치면 예외 발생")
-    @Test
-    void 당첨_번호와_보너스_번호가_겹치면_예외_발생() {
-        //when&then
-        assertThatThrownBy(() -> new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)),new BonusNumber(6)))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
 }

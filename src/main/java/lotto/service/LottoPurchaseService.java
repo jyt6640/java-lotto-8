@@ -13,7 +13,7 @@ public class LottoPurchaseService {
         Money money = new Money(amount);
         int count = money.calculateLottoCount();
         Lottos lottos = generateLottos(count);
-        return new LottoPurchaseResult(count, lottos);
+        return new LottoPurchaseResult(count, lottos, money);
     }
 
     private Lottos generateLottos(int count) {

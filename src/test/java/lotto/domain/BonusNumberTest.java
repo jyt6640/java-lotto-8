@@ -3,12 +3,21 @@ package lotto.domain;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class BonusNumberTest {
+    private Lotto defaultWinningNumbers;
+
+    @BeforeEach
+    void setUp() {
+        defaultWinningNumbers = new Lotto(List.of(1,2,3,4,5,6));
+    }
+
     @DisplayName("BonusNumber 정상 생성")
     @Test
     void BonusNumber_정상_생성() {
@@ -16,7 +25,7 @@ public class BonusNumberTest {
         int input = 42;
 
         //when&then
-        assertThatCode(() -> new BonusNumber(input))
+        assertThatCode(() -> new BonusNumber(input, defaultWinningNumbers))
                 .doesNotThrowAnyException();
     }
 
@@ -25,8 +34,17 @@ public class BonusNumberTest {
     @ParameterizedTest
     void 보너스_넘버가_1에서_45_범위를_넘어갈_시_예외_발생 (int input) {
         //when&then
-        assertThatThrownBy(() -> new BonusNumber(input))
+        assertThatThrownBy(() -> new BonusNumber(input, defaultWinningNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 1~45 범위 값만 허용됩니다.");
+    }
+
+    @DisplayName("당첨 번호와 보너스 번호가 겹치면 예외 발생")
+    @Test
+    void 당첨_번호와_보너스_번호가_겹치면_예외_발생() {
+        //when&then
+        assertThatThrownBy(() -> new BonusNumber(6, defaultWinningNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
 }

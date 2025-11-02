@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,10 +21,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoResultServiceTest {
     private LottoResultService lottoResultService;
+    private Lotto defatultWinningNumber;
 
     @BeforeEach
     public void setUp(){
         lottoResultService = new LottoResultService();
+        defatultWinningNumber = new Lotto(List.of(1, 2, 3, 4, 5, 6));
     }
 
     @DisplayName("하나의 로또에 대해서 로또 번호와 당첨 번호를 비교하여 순위 반환")
@@ -37,7 +40,7 @@ public class LottoResultServiceTest {
     ) {
         //given
         Lotto myLotto = new Lotto(myNumber);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), new BonusNumber(bonusNumber));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), new BonusNumber(bonusNumber, defatultWinningNumber));
 
         //when
         Rank result = lottoResultService.getRank(winningLotto, myLotto);
@@ -104,7 +107,6 @@ public class LottoResultServiceTest {
     @ParameterizedTest
     void 여러_장의_로또_당첨_통계_계산(
             List<List<Integer>> lottoNumbers,
-            List<Integer> winningNumber,
             int bonusNumber,
             Map<Rank, Integer> expectedStatistics
     ) {
@@ -113,7 +115,7 @@ public class LottoResultServiceTest {
                 .map(Lotto::new)
                 .toList();
         Lottos input = new Lottos(lottos);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), new BonusNumber(bonusNumber));
+        WinningLotto winningLotto = new WinningLotto(defatultWinningNumber, new BonusNumber(bonusNumber, defatultWinningNumber));
 
         //when
         Map<Rank, Integer> result = lottoResultService.getStatistics(winningLotto, input);
@@ -132,7 +134,6 @@ public class LottoResultServiceTest {
                                 List.of(1, 2, 3, 10, 11, 12),
                                 List.of(10, 11, 12, 13, 14, 15)
                         ),
-                        List.of(1, 2, 3, 4, 5, 6),
                         7,
                         Map.of(
                                 Rank.FIRST, 1,
@@ -148,7 +149,6 @@ public class LottoResultServiceTest {
                                 List.of(1, 2, 3, 4, 5, 6),
                                 List.of(1, 2, 3, 4, 5, 6)
                         ),
-                        List.of(1, 2, 3, 4, 5, 6),
                         7,
                         Map.of(
                                 Rank.FIRST, 2,
@@ -164,7 +164,6 @@ public class LottoResultServiceTest {
                                 List.of(1, 2, 3, 4, 5, 7),
                                 List.of(1, 2, 3, 4, 5, 10)
                         ),
-                        List.of(1, 2, 3, 4, 5, 6),
                         7,
                         Map.of(
                                 Rank.FIRST, 0,
@@ -182,7 +181,6 @@ public class LottoResultServiceTest {
                                 List.of(1, 2, 3, 7, 10, 11),
                                 List.of(1, 2, 3, 10, 11, 12)
                         ),
-                        List.of(1, 2, 3, 4, 5, 6),
                         7,
                         Map.of(
                                 Rank.FIRST, 0,
@@ -204,7 +202,6 @@ public class LottoResultServiceTest {
                                 List.of(2, 13, 22, 32, 38, 45),
                                 List.of(1, 3, 5, 14, 22, 45)
                         ),
-                        List.of(1, 2, 3, 4, 5, 6),
                         7,
                         Map.of(
                                 Rank.FIRST, 0,
@@ -221,7 +218,6 @@ public class LottoResultServiceTest {
                                 List.of(20, 21, 22, 23, 24, 25),
                                 List.of(30, 31, 32, 33, 34, 35)
                         ),
-                        List.of(1, 2, 3, 4, 5, 6),
                         7,
                         Map.of(
                                 Rank.FIRST, 0,
@@ -239,7 +235,7 @@ public class LottoResultServiceTest {
     @Test
     void 당첨_통계_기반으로_수익률_계산() {
         //given
-        int totalPurchaseAmount = 6 * 1000;
+        Money input = new Money(6 * 1000);
 
         Map<Rank, Integer> statistics = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
@@ -254,7 +250,7 @@ public class LottoResultServiceTest {
         statistics.put(Rank.NONE, 1);
 
         //when
-        double result = lottoResultService.calculateProfitRate(statistics, totalPurchaseAmount);
+        double result = lottoResultService.calculateProfitRate(statistics, input);
 
         //then
         assertThat(result).isEqualTo(33859250);

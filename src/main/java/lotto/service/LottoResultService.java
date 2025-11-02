@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 
@@ -34,7 +35,7 @@ public class LottoResultService {
         return statistics;
     }
 
-    public double calculateProfitRate(Map<Rank, Integer> statistics, int totalPurchaseAmount) {
+    public double calculateProfitRate(Map<Rank, Integer> statistics, Money money) {
         long totalPrize = 0;
 
         for(Map.Entry<Rank, Integer> entry : statistics.entrySet()) {
@@ -43,6 +44,6 @@ public class LottoResultService {
             totalPrize += rank.getPrize() * count;
         }
 
-        return ((double) totalPrize / totalPurchaseAmount) * 100;
+        return money.calculateProfitRate(totalPrize);
     }
 }

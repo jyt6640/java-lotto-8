@@ -29,14 +29,16 @@ public class LottoController {
 
     public void run() {
         try {
-            int purchaseAmount = retryOnException(inputHandler::readPurchaseAmount);
-            LottoPurchaseResult result = retryOnException(() -> lottoPurchaseService.purchase(purchaseAmount));
+            LottoPurchaseResult result = retryOnException(() -> {
+                int purchaseAmount = inputHandler.readPurchaseAmount();
+                return lottoPurchaseService.purchase(purchaseAmount);
+            });
             outputHandler.printMyLottos(result);
 
             WinningLotto winningLotto = createWinningLottoSafely();
 
             Map<Rank, Integer> statistics = lottoResultService.getStatistics(winningLotto, result.getLottos());
-            double profitRate = lottoResultService.calculateProfitRate(statistics, purchaseAmount);
+            double profitRate = lottoResultService.calculateProfitRate(statistics, result.getMoney());
 
             outputHandler.printResult(statistics, profitRate);
         } finally {
@@ -55,18 +57,14 @@ public class LottoController {
     }
 
     private WinningLotto createWinningLottoSafely() {
-        while (true) {
-            try {
-                Lotto winningLotto = retryOnException(() ->
-                        new Lotto(inputHandler.readWinningNumbers())
-                );
-                BonusNumber bonusNumber = retryOnException(() ->
-                        new BonusNumber(inputHandler.readBonusNumber())
-                );
-                return new WinningLotto(winningLotto, bonusNumber);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        Lotto winningNumbers = retryOnException(() ->
+                new Lotto(inputHandler.readWinningNumbers())
+        );
+
+        BonusNumber bonusNumber = retryOnException(() ->
+                new BonusNumber(inputHandler.readBonusNumber(), winningNumbers)
+        );
+
+        return new WinningLotto(winningNumbers, bonusNumber);
     }
 }
