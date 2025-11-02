@@ -54,4 +54,18 @@ public class MoneyTest {
                 .hasMessageContaining("[ERROR] 금액은 1,000원 단위이어야 합니다.");
 
     }
+
+    @DisplayName("수익률 계산")
+    @Test
+    void 수익률_계산() {
+        //given
+        int input = 50000;
+        Money money = new Money(input);
+
+        //when
+        double result = money.calculateProfitRate(50000);
+
+        //then
+        assertThat(result).isEqualTo(100.0);
+    }
 }
