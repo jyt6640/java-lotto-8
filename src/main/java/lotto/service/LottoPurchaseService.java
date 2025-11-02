@@ -6,9 +6,15 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.dto.LottoPurchaseResult;
-import lotto.util.LottoNumberGenerator;
+import lotto.generator.NumberGenerator;
 
 public class LottoPurchaseService {
+    private final NumberGenerator numberGenerator;
+
+    public LottoPurchaseService(NumberGenerator numberGenerator) {
+        this.numberGenerator = numberGenerator;
+    }
+
     public LottoPurchaseResult purchase(int amount) {
         Money money = new Money(amount);
         int count = money.calculateLottoCount();
@@ -25,7 +31,7 @@ public class LottoPurchaseService {
     }
 
     private Lotto generateLotto() {
-        List<Integer> lottoNumbers = LottoNumberGenerator.getLotto();
+        List<Integer> lottoNumbers = numberGenerator.generate();
         return new Lotto(lottoNumbers);
     }
 }

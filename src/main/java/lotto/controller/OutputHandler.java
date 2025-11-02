@@ -9,6 +9,10 @@ import lotto.view.OutputView;
 public class OutputHandler {
     private OutputView outputView = new OutputView();
 
+    public OutputHandler(OutputView outputView) {
+        this.outputView = outputView;
+    }
+
     public void showMyLottos(LottoPurchaseResult result) {
         int purchaseCount = result.getCount();
         Lottos lottos = result.getLottos();

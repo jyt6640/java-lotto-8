@@ -7,40 +7,33 @@ import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
-import lotto.service.LottoPurchaseService;
-import lotto.service.LottoResultService;
+import lotto.service.LottoGameService;
 import lotto.dto.LottoPurchaseResult;
-import lotto.view.InputView;
+
 
 public class LottoController {
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
-    private final LottoPurchaseService lottoPurchaseService;
-    private final LottoResultService lottoResultService;
-    private final InputView inputView;
+    private final LottoGameService gameService;
 
-    public LottoController() {
-        this.inputView = new InputView();
-        this.inputHandler = new InputHandler(inputView);
-        this.outputHandler = new OutputHandler();
-        this.lottoPurchaseService = new LottoPurchaseService();
-        this.lottoResultService = new LottoResultService();
+    public LottoController(
+            InputHandler inputHandler,
+            OutputHandler outputHandler,
+            LottoGameService gameService
+    ) {
+        this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
+        this.gameService = gameService;
     }
 
     public void run() {
         try {
-            LottoPurchaseResult result = retryOnException(() -> {
-                int purchaseAmount = inputHandler.readPurchaseAmount();
-                return lottoPurchaseService.purchase(purchaseAmount);
-            });
+            LottoPurchaseResult result = purchaseLottosWithRetry();
             outputHandler.showMyLottos(result);
 
             WinningLotto winningLotto = createWinningLottoSafely();
 
-            Map<Rank, Integer> statistics = lottoResultService.getStatistics(winningLotto, result.getLottos());
-            double profitRate = lottoResultService.calculateProfitRate(statistics, result.getMoney());
-
-            outputHandler.showResult(statistics, profitRate);
+            showGameResult(result, winningLotto);
         } finally {
             Console.close();
         }
@@ -66,5 +59,24 @@ public class LottoController {
         );
 
         return new WinningLotto(winningNumbers, bonusNumber);
+    }
+
+    private LottoPurchaseResult purchaseLottosWithRetry() {
+        return retryOnException(() -> {
+            int purchaseAmount = inputHandler.readPurchaseAmount();
+            return gameService.purchaseLottos(purchaseAmount);
+        });
+    }
+
+    private void showGameResult(LottoPurchaseResult result, WinningLotto winningLotto) {
+        Map<Rank, Integer> statistics = gameService.calculateStatistics(
+                winningLotto,
+                result.getLottos()
+        );
+        double profitRate = gameService.calculateProfitRate(
+                statistics,
+                result.getMoney()
+        );
+        outputHandler.showResult(statistics, profitRate);
     }
 }
