@@ -42,13 +42,6 @@ public enum Rank {
                 .orElse(NONE);
     }
 
-    private Rank upgrade() {
-        if (this == SECOND) {
-            return this;
-        }
-        return upperRank;
-    }
-
     public String getMessage() {
         if (this == NONE) return messageFormat;
         String formattedPrize = String.format("%,d", prize);
@@ -57,5 +50,12 @@ public enum Rank {
 
     public long getPrize() {
         return prize;
+    }
+
+    private Rank upgrade() {
+        if (this == SECOND) {
+            return this;
+        }
+        return upperRank;
     }
 }

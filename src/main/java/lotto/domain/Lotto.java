@@ -20,6 +20,14 @@ public class Lotto {
         this.numbers = sortAscending(numbers);
     }
 
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
     private void validate(List<Integer> numbers) {
         validateNumberCount(numbers);
         validateDuplicateNumber(numbers);
@@ -51,13 +59,5 @@ public class Lotto {
                 throw new IllegalArgumentException(INVALID_NUMBER_RANGE.toString());
             }
         });
-    }
-
-    public boolean contains(int number) {
-        return numbers.contains(number);
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
     }
 }

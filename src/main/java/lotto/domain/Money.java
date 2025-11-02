@@ -20,7 +20,11 @@ public class Money {
         return amount / LOTTO_PRICE;
     }
 
-    public void validate(int amount) {
+    public double calculateProfitRate(long totalPrize) {
+        return ((double) totalPrize / amount) * PERCENT_CONVERSION;
+    }
+
+    private void validate(int amount) {
         validateMinAmount(amount);
         validateMaxAmount(amount);
         validateUnit(amount);
@@ -42,9 +46,5 @@ public class Money {
         if (amount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(INVALID_MONEY_UNIT.toString());
         }
-    }
-
-    public double calculateProfitRate(long totalPrize) {
-        return ((double) totalPrize / amount) * PERCENT_CONVERSION;
     }
 }
