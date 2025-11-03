@@ -14,6 +14,10 @@ public class BonusNumber {
         this.bonusNumber = bonusNumber;
     }
 
+    public boolean isBonusNumberContainedIn(Lotto lotto) {
+        return lotto.contains(bonusNumber);
+    }
+
     private void validate(int bonusNumber, Lotto winningNumbers) {
         validateRange(bonusNumber);
         validateDuplicate(bonusNumber, winningNumbers);
@@ -29,9 +33,5 @@ public class BonusNumber {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER.toString());
         }
-    }
-
-    public boolean isContainedIn(Lotto lotto) {
-        return lotto.contains(bonusNumber);
     }
 }

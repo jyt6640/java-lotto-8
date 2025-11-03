@@ -11,6 +11,7 @@ public enum Rank {
     NONE(FIFTH, 0, false, 0L, "꽝");
 
     private static final int BONUS_AVAILABLE_FROM_MATCH = 2;
+    private static final String PRIZE_FORMAT = "%,d";
 
     private Rank upperRank;
     private final int matchCount;
@@ -44,7 +45,7 @@ public enum Rank {
 
     public String getMessage() {
         if (this == NONE) return messageFormat;
-        String formattedPrize = String.format("%,d", prize);
+        String formattedPrize = String.format(PRIZE_FORMAT, prize);
         return String.format(messageFormat, formattedPrize);
     }
 

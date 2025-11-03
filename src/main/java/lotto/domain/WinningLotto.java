@@ -17,7 +17,7 @@ public class WinningLotto {
     }
 
     public boolean hasBonusNumber(Lotto lotto) {
-        return bonusNumber.isContainedIn(lotto);
+        return bonusNumber.isBonusNumberContainedIn(lotto);
     }
 
     public Rank determineRank(Lotto lotto) {
