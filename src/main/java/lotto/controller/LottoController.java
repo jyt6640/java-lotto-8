@@ -23,21 +23,30 @@ public class LottoController {
     public void run() {
         Money money = inputController.getMoney();
         int purchaseCount = money.purchaseCount();
-        purchase(purchaseCount);
+        List<Lotto> purchaseLotteries = purchase(purchaseCount);
+        printLotto(purchaseLotteries);
 
         Lotto winngingLotto = inputController.getWinningNumbers();
         BonusNumber bonusNumber = inputController.getBonusNumber();
     }
 
     private List<Lotto> purchase(int purchaseCount) {
-        List<Lotto> lottos = new ArrayList<>();
+        List<Lotto> lotteries = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
-            lottos.add(generateLotto());
+            lotteries.add(generateLotto());
         }
-        return lottos;
+        return lotteries;
     }
 
     private Lotto generateLotto() {
         return new Lotto(lottoGenerator.generator());
+    }
+
+    private void printLotto(List<Lotto> purchaseLotteries) {
+        List<List<Integer>> lotteries = new ArrayList<>();
+        for (Lotto lotto : purchaseLotteries) {
+            lotteries.add(lotto.getNumbers());
+        }
+        outputView.printPurchaseLotto(lotteries);
     }
 }
