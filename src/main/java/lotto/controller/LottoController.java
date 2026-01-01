@@ -34,8 +34,10 @@ public class LottoController {
         BonusNumber bonusNumber = inputController.getBonusNumber();
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        calculateRank(purchaseLotteries, winningLotto);
+        Map<Rank, Integer> rankCount = calculateRank(purchaseLotteries, winningLotto);
+        double profitRate = calculateProfitRate(rankCount, money);
 
+        outputView.printStatistics(rankCount, profitRate);
     }
 
     private List<Lotto> purchase(int purchaseCount) {
@@ -73,6 +75,16 @@ public class LottoController {
             rankCount.put(rank, 0);
         }
         return rankCount;
+    }
+
+    public double calculateProfitRate(Map<Rank, Integer> rankCount, Money money) {
+        long totalPrize = 0;
+        for(Map.Entry<Rank, Integer> entry : rankCount.entrySet()) {
+            Rank rank = entry.getKey();
+            int count = entry.getValue();
+            totalPrize += rank.getPrize() * count;
+        }
+        return ((double) totalPrize / money.getMoney()) * 100;
     }
 
 }
