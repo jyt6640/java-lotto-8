@@ -10,6 +10,13 @@ public class InputView {
         return money;
     }
 
+    public String readWinningNumbers() {
+        System.out.println("당첨 번호를 입력해 주세요.");
+        String winningNumbers = readLine();
+        System.out.println();
+        return winningNumbers;
+    }
+
     protected String readLine() {
         return Console.readLine();
     }
