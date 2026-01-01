@@ -1,8 +1,8 @@
 package lotto.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import lotto.Lotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -26,10 +26,10 @@ public class InputController {
         }
     }
 
-    public List<Integer> getWinningNumbers() {
+    public Lotto getWinningNumbers() {
         while (true) {
             try {
-                return readWinningNumbers();
+                return new Lotto(readWinningNumbers());
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e);
             }
