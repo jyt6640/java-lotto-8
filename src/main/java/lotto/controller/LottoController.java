@@ -17,6 +17,8 @@ public class LottoController {
 
     public void run() {
         Money money = inputController.getMoney();
+        int purchaseCount = money.purchaseCount();
+
         Lotto winngingLotto = inputController.getWinningNumbers();
         BonusNumber bonusNumber = inputController.getBonusNumber();
     }
