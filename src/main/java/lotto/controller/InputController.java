@@ -2,7 +2,8 @@ package lotto.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.Lotto;
+import lotto.domain.BonusNumber;
+import lotto.domain.Lotto;
 import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -37,10 +38,10 @@ public class InputController {
         }
     }
 
-    public int getBonusNumber() {
+    public BonusNumber getBonusNumber() {
         while (true) {
             try {
-                return readBonusNumber();
+                return new BonusNumber(readBonusNumber());
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e);
             }

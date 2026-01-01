@@ -1,6 +1,7 @@
 package lotto.controller;
 
-import lotto.Lotto;
+import lotto.domain.BonusNumber;
+import lotto.domain.Lotto;
 import lotto.domain.Money;
 import lotto.view.OutputView;
 
@@ -17,6 +18,6 @@ public class LottoController {
     public void run() {
         Money money = inputController.getMoney();
         Lotto winngingLotto = inputController.getWinningNumbers();
-        int bonusNumber = inputController.getBonusNumber();
+        BonusNumber bonusNumber = inputController.getBonusNumber();
     }
 }
