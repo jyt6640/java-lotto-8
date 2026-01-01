@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.Arrays;
 import java.util.List;
 import lotto.Lotto;
+import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -16,10 +17,10 @@ public class InputController {
         this.outputView = outputView;
     }
 
-    public int getMoney() {
+    public Money getMoney() {
         while (true) {
             try {
-                return readMoney();
+                return new Money(readMoney());
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e);
             }
