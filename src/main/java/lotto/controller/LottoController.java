@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
@@ -22,9 +23,18 @@ public class LottoController {
     public void run() {
         Money money = inputController.getMoney();
         int purchaseCount = money.purchaseCount();
+        purchase(purchaseCount);
 
         Lotto winngingLotto = inputController.getWinningNumbers();
         BonusNumber bonusNumber = inputController.getBonusNumber();
+    }
+
+    private List<Lotto> purchase(int purchaseCount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < purchaseCount; i++) {
+            lottos.add(generateLotto());
+        }
+        return lottos;
     }
 
     private Lotto generateLotto() {
