@@ -1,10 +1,13 @@
 package lotto.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
+import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.util.NumberGenerator;
 import lotto.view.OutputView;
@@ -31,6 +34,8 @@ public class LottoController {
         BonusNumber bonusNumber = inputController.getBonusNumber();
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
+        calculateRank(purchaseLotteries, winningLotto);
+
     }
 
     private List<Lotto> purchase(int purchaseCount) {
@@ -51,6 +56,23 @@ public class LottoController {
             lotteries.add(lotto.getNumbers());
         }
         outputView.printPurchaseLotto(lotteries);
+    }
+
+    private Map<Rank, Integer> calculateRank(List<Lotto> lotteries, WinningLotto winningLotto) {
+        Map<Rank, Integer> rankCount = initializeRankCount();
+        for (Lotto lotto : lotteries) {
+            Rank rank = winningLotto.determineRank(lotto);
+            rankCount.put(rank, rankCount.get(rank) + 1);
+        }
+        return rankCount;
+    }
+
+    private Map<Rank, Integer> initializeRankCount() {
+        Map<Rank, Integer> rankCount = new HashMap<>();
+        for(Rank rank : Rank.values()) {
+            rankCount.put(rank, 0);
+        }
+        return rankCount;
     }
 
 }

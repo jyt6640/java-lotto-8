@@ -21,4 +21,10 @@ public class WinningLotto {
         return lotto.contains(bonusNumber.getBonusNumber());
     }
 
+    public Rank determineRank(Lotto lotto) {
+        int matchCount = countMatches(lotto);
+        boolean hasBonusNumber = hasBonusNumber(lotto);
+        return Rank.of(matchCount, hasBonusNumber);
+    }
+
 }
