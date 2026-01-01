@@ -28,6 +28,8 @@ public class LottoController {
 
         Lotto winngingLotto = inputController.getWinningNumbers();
         BonusNumber bonusNumber = inputController.getBonusNumber();
+
+        List<Integer> matchCount = matchCountResult(winngingLotto, purchaseLotteries);
     }
 
     private List<Lotto> purchase(int purchaseCount) {
@@ -48,5 +50,18 @@ public class LottoController {
             lotteries.add(lotto.getNumbers());
         }
         outputView.printPurchaseLotto(lotteries);
+    }
+
+    private List<Integer> matchCountResult(Lotto winningLotto, List<Lotto> purchasedLotteries) {
+        List<Integer> winningNumbers = winningLotto.getNumbers();
+        return purchasedLotteries.stream()
+                .map(lotto -> matchCount(lotto, winningNumbers))
+                .toList();
+    }
+
+    private int matchCount(Lotto lotto, List<Integer> winningNumbers) {
+        return (int) lotto.getNumbers().stream()
+                .filter(winningNumbers::contains)
+                .count();
     }
 }
