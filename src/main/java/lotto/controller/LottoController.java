@@ -5,6 +5,7 @@ import java.util.List;
 import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.util.NumberGenerator;
 import lotto.view.OutputView;
 
@@ -26,10 +27,10 @@ public class LottoController {
         List<Lotto> purchaseLotteries = purchase(purchaseCount);
         printLotto(purchaseLotteries);
 
-        Lotto winngingLotto = inputController.getWinningNumbers();
+        Lotto winningNumbers = inputController.getWinningNumbers();
         BonusNumber bonusNumber = inputController.getBonusNumber();
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        List<Integer> matchCount = matchCountResult(winngingLotto, purchaseLotteries);
     }
 
     private List<Lotto> purchase(int purchaseCount) {
@@ -52,16 +53,4 @@ public class LottoController {
         outputView.printPurchaseLotto(lotteries);
     }
 
-    private List<Integer> matchCountResult(Lotto winningLotto, List<Lotto> purchasedLotteries) {
-        List<Integer> winningNumbers = winningLotto.getNumbers();
-        return purchasedLotteries.stream()
-                .map(lotto -> matchCount(lotto, winningNumbers))
-                .toList();
-    }
-
-    private int matchCount(Lotto lotto, List<Integer> winningNumbers) {
-        return (int) lotto.getNumbers().stream()
-                .filter(winningNumbers::contains)
-                .count();
-    }
 }
