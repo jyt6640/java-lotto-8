@@ -41,7 +41,7 @@ public class LottoController {
     }
 
     private Lotto generateLotto() {
-        return new Lotto(lottoGenerator.generator());
+        return new Lotto(lottoGenerator.generate());
     }
 
     private void printLotto(List<Lotto> purchaseLotteries) {
