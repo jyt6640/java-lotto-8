@@ -7,4 +7,8 @@ public class Money {
     public Money(int money) {
         this.money = money;
     }
+
+    public int getCount() {
+        return money / 1000;
+    }
 }
