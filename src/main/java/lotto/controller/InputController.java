@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -13,19 +14,19 @@ public class InputController {
         this.outputView = outputView;
     }
 
-    public Object getXX() {
+    public Money getPurchaseAmount() {
         while (true) {
             try {
-                return readXX();
-            } catch (IllegalArgumentException exception) {
-                outputView.printErrorMessage(exception);
+                return new Money(readPurchaseAmount());
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e);
             }
         }
     }
 
-    private Object readXX() {
-        String value = inputView.readXX();
-        return XX.from(value);
+    private int readPurchaseAmount() {
+        String value = inputView.readPurchaseAmount();
+        return Integer.parseInt(value);
     }
 
 }
