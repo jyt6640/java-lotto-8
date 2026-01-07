@@ -11,4 +11,8 @@ public class Money {
     public int getCount() {
         return money / 1000;
     }
+
+    public int getMoney() {
+        return money;
+    }
 }

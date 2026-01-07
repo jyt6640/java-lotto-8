@@ -7,6 +7,10 @@ public class LottoGenerator implements NumberGenerator {
 
     @Override
     public Lotto generate() {
-        return new Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6));
+        return new Lotto(
+                Randoms.pickUniqueNumbersInRange(1, 45, 6)
+                        .stream()
+                        .sorted()
+                        .toList());
     }
 }
