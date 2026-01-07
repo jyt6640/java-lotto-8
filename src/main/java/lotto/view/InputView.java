@@ -11,6 +11,20 @@ public class InputView {
         return value;
     }
 
+    public String readWinningLotto() {
+        System.out.println("당첨 번호를 입력해 주세요.");
+        String value = readLine();
+        System.out.println();
+        return value;
+    }
+
+    public String readBonusNumber() {
+        System.out.println("보너스 번호를 입력해 주세요.");
+        String value = readLine();
+        System.out.println();
+        return value;
+    }
+
     private String readLine() {
         return Console.readLine();
     }
